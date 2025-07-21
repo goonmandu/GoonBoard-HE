@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "blink",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"usb.h": "c",
+			"joystick.h": "c",
+			"platform.h": "c"
+		}
+	}
+}

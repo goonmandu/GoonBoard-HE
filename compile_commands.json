@@ -1,0 +1,560 @@
+[
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/CDC.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/CDC.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/CDC.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/CDC.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial0.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial0.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial0.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial0.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial1.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial1.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial1.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial1.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial2.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial2.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial2.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial2.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial3.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial3.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial3.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/HardwareSerial3.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/IPAddress.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/IPAddress.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/IPAddress.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/IPAddress.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/PluggableUSB.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/PluggableUSB.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/PluggableUSB.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/PluggableUSB.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/Print.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/Print.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/Print.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/Print.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/Stream.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/Stream.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/Stream.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/Stream.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/Tone.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/Tone.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/Tone.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/Tone.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/USBCore.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/USBCore.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/USBCore.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/USBCore.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/WInterrupts.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/WInterrupts.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/WInterrupts.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/WInterrupts.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/WMath.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/WMath.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/WMath.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/WMath.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/WString.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/WString.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/WString.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/WString.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/abi.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/abi.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/abi.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/abi.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/hooks.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/hooks.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/hooks.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/hooks.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/main.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/main.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/main.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/main.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/FrameworkArduino/new.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/new.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/new.cpp",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/new.cpp.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/wiring.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/wiring.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/wiring_analog.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_analog.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_analog.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/wiring_analog.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/wiring_digital.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_digital.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_digital.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/wiring_digital.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -mmcu=atmega32u4 -x assembler-with-cpp -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro -c -o .pio/build/sparkfun_promicro16/FrameworkArduino/wiring_pulse.S.o /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.S",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.S",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/wiring_pulse.S.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/wiring_pulse.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/wiring_pulse.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/FrameworkArduino/wiring_shift.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro /Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_shift.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_shift.c",
+        "output": ".pio/build/sparkfun_promicro16/FrameworkArduino/wiring_shift.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Board/Temperature.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/Board/Temperature.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/Board/Temperature.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Board/Temperature.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Common/HIDParser.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Common/HIDParser.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Common/HIDParser.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Common/HIDParser.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/AudioClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/AudioClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/AudioClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/AudioClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/CCIDClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/CCIDClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/CCIDClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/CCIDClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/CDCClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/CDCClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/CDCClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/CDCClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/HIDClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/HIDClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/HIDClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/HIDClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/AudioClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/AudioClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/AudioClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/AudioClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/CDCClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/CDCClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/CDCClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/CDCClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/HIDClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/HIDClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/HIDClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/HIDClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/MIDIClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/MIDIClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/MIDIClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/MIDIClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/PrinterClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/PrinterClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/PrinterClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/PrinterClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/RNDISClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/RNDISClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/RNDISClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/RNDISClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/StillImageClassHost.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Class/Host/StillImageClassHost.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Class/Host/StillImageClassHost.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Class/Host/StillImageClassHost.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_R.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_R.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_R.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_R.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_W.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_W.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_W.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_W.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_RW.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_RW.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_RW.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_RW.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Pipe_RW.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Pipe_RW.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/Template/Template_Pipe_RW.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/Template/Template_Pipe_RW.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/ConfigDescriptors.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/ConfigDescriptors.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/ConfigDescriptors.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/ConfigDescriptors.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/DeviceStandardReq.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/DeviceStandardReq.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/DeviceStandardReq.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/DeviceStandardReq.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/Events.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/Events.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/Events.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/Events.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/HostStandardReq.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/HostStandardReq.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/HostStandardReq.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/HostStandardReq.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Device_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Device_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Device_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Device_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Host_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Host_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Host_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Host_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_R.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_R.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_R.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_R.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_W.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_W.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_W.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_W.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_RW.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_RW.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_RW.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_RW.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Pipe_RW.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Pipe_RW.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/Template/Template_Pipe_RW.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/Template/Template_Pipe_RW.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/USBController_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/USBController_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/USBController_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/USBController_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/USBTask.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/USBTask.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/USBTask.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/USBTask.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Host_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Host_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Host_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Host_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/PipeStream_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/PipeStream_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/PipeStream_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/PipeStream_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Pipe_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Pipe_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Pipe_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Pipe_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_R.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_R.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_R.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_R.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_W.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_W.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_W.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_W.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_RW.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_RW.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_RW.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_RW.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -mmcu=atmega32u4 -x assembler-with-cpp -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro -c -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Platform/UC3/Exception.S.o lib/LUFA/Platform/UC3/Exception.S",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Platform/UC3/Exception.S",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Platform/UC3/Exception.S.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/libfc7/LUFA/Platform/UC3/InterruptManagement.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro lib/LUFA/Platform/UC3/InterruptManagement.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "lib/LUFA/Platform/UC3/InterruptManagement.c",
+        "output": ".pio/build/sparkfun_promicro16/libfc7/LUFA/Platform/UC3/InterruptManagement.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/src/Descriptors.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Iinclude -Isrc -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro src/Descriptors.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "src/Descriptors.c",
+        "output": ".pio/build/sparkfun_promicro16/src/Descriptors.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/sparkfun_promicro16/src/Keyboard.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Iinclude -Isrc -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro src/Keyboard.c",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "src/Keyboard.c",
+        "output": ".pio/build/sparkfun_promicro16/src/Keyboard.c.o"
+    },
+    {
+        "command": "/Users/mingi/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/sparkfun_promicro16/src/main.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega32u4 -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_PROMICRO16 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_MICRO -DUSE_STATIC_OPTIONS=0 -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -DUSB_VID=0x1B4F -DUSB_PID=0x9206 \"-DUSB_PRODUCT=\\\"SparkFun Pro Micro\\\"\" -DUSB_MANUFACTURER=\\\"SparkFun\\\" -Iinclude -Isrc -Ilib/LUFA -I/Users/mingi/.platformio/packages/framework-arduino-avr/cores/arduino -I/Users/mingi/.platformio/packages/framework-arduino-avr/variants/sparkfun_promicro src/main.cpp",
+        "directory": "/Users/mingi/Desktop/blink",
+        "file": "src/main.cpp",
+        "output": ".pio/build/sparkfun_promicro16/src/main.cpp.o"
+    }
+]
