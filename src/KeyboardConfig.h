@@ -6,6 +6,16 @@
 // This is defined as the required keypress depth.
 // For example, MM(0.5) means you have to press the key 0.5 mm for it to register as a press.
 // Valid range: 0.1 - 3.4 (for Gateron "Magnetic Jade Shaft" KS-20T switches)
+// ADC baseline: 100 (0x64) when switch is fully released.
+// Conversion factor: 1 ADC bit ≈ 0.1 mm travel for KS-20T.
+//
+// Notes:
+//   - Released ADC: 104
+//   - Bottom-out ADC: 68
+//   - Total travel: 3.5 mm
+//
+//     (104 - 68) / 35 = ~1.03 bits per mm
+//     Rounded to 1 bit per 0.1 mm for simplicity
 #define MM(MILLIMETERS) (100-(int)(MILLIMETERS*10))
 
 // Refer to "lib/LUFA/Drivers/USB/Class/Common/HIDClassCommon.h" for the key names.
@@ -33,7 +43,6 @@ const uint8_t KEYMAP[NUM_KEYS] = {
 
 // Use the MM() macro.
 // MUX Channels C0 - C15, in order
-// Valid range: 0.1 - 3.4 (for Gateron "Magnetic Jade Shaft" KS-20T switches)
 #ifndef USE_COMMON_ACTUATION
 const uint8_t ACTUATIONS[NUM_KEYS] = {
 	MM(1.0),
