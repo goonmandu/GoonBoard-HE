@@ -3,8 +3,7 @@
 
 #include <avr/io.h>
 #include "SPI.h"
-
-#define NUM_KEYS 4
+#include "KeyboardConfig.h"
 
 #define BEING_RELEASED 0
 #define BEING_PRESSED 1

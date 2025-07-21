@@ -52,25 +52,6 @@ extern uint8_t adc_values[NUM_KEYS];
 // extern uint8_t key_actions[NUM_KEYS];
 extern uint8_t key_status[NUM_KEYS];
 
-// MUX Channels C0 - C15, in order
-const uint8_t KEYMAP[NUM_KEYS] = {
-	HID_KEYBOARD_SC_A,
-	HID_KEYBOARD_SC_S,
-	HID_KEYBOARD_SC_D,
-	HID_KEYBOARD_SC_F,
-};
-
-// 7-bit ADC
-// IDLE 1.962V, 1.962 V * (1 step / 0.03906250 V) =  50.22 ADC = 0x32
-// TEST 1.435V, 1.435 V * (1 step / 0.03906250 V) =  36.74 ADC = 0x25
-
-// 8‑bit ADC
-// IDLE 1.962 V, 1.962 V * (1 step / 0.01953125 V) = 100.45 ADC = 0x64
-// TEST 1.435 V, 1.435 V * (1 step / 0.01953125 V)=   73.47 ADC = 0x49
-
-// [ADC value decreases as key is presssed]
-#define ACTUATION 90
-
 /* END CUSTOMIZATION CODE */
 
 /** LUFA HID Class driver interface configuration and state information. This structure is
@@ -191,7 +172,11 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
 	else {
 		// Fixed Actuation
 		for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
-			if (adc_values[mux_idx] <= ACTUATION) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
+			#ifdef USE_COMMON_ACTUATION
+			if (adc_values[mux_idx] <= COMMON_ACTUATION) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
+			#else
+			if (adc_values[mux_idx] <= ACTUATIONS[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
+			#endif /* USE_COMMON_ACTUATION */
 		}
 	}
 
