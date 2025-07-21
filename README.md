@@ -20,7 +20,7 @@ Since I have used the PlatformIO toolchain for the entirety of the development p
 4. Click on the `PlatformIO: Build` button.
 5. Click on the `PlatformIO: Upload` button.
 6. Put your microcontroller into DFU mode by shorting `RST` and `GND`.
-7. Wait a few seconds and your microcontroller will be recognized as `GoonMandu Proof-of-Concept Keyboard` with VID:PID `2B00:B1E5`.
+7. Wait a few seconds and your microcontroller will be recognized as `GoonMandu GoonBoard` with VID:PID `2B00:B1E5`.
 
 ## Performance
 - Polling rate: 1000 Hz
