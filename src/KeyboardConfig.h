@@ -14,7 +14,7 @@
 //   - Bottom-out ADC: 68
 //   - Total travel: 3.5 mm
 //
-//     (104 - 68) / 35 = ~1.03 bits per mm
+//     (104 - 68) / 35 = ~1.03 bits per 0.1 mm
 //     Rounded to 1 bit per 0.1 mm for simplicity
 #define MM(MILLIMETERS) (100-(int)(MILLIMETERS*10))
 
