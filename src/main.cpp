@@ -9,6 +9,7 @@ extern USB_ClassInfo_HID_Device_t Keyboard_HID_Interface;
 int main(void) {
 	SetupHardware();
 
+	// Turn off Pro Micro TX/RX LEDs
     DDRB |= (1 << PB0);
     DDRD |= (1 << PD5);
     PORTB |= (1 << PB0);
@@ -27,7 +28,7 @@ int main(void) {
 	
 	GlobalInterruptEnable();
 
-	for (;;) {
+	while (1) {
 		HID_Device_USBTask(&Keyboard_HID_Interface);
 		USB_USBTask();
 	}

@@ -37,7 +37,9 @@ I will not be paying much attention to this repository once I have implemented t
 Discord: `goonmandu`<br>
 Email: `hwang [dot] mingi7 [at] gmail [dot] com`
 
-## Acknowledgements
+## Acknowledgements and Open-Source Licenses
+All files under `src/` that do not contain a license header are licensed under the MIT License, Copyright (c) 2025 Mingi Hwang.
+
 This firmware is built upon the Keyboard demo from the LUFA repository:
 - [LUFA](https://github.com/abcminiuser/lufa):
     ```
