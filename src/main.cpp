@@ -31,9 +31,16 @@ int main(void) {
     GlobalInterruptEnable();
 
     while (1) {
+        #ifdef LOGIC_ANALYZER_DEBUG
         PORTF |= (1 << PF7);
+        #endif
+
         HID_Device_USBTask(&Keyboard_HID_Interface);
+
+        #ifdef LOGIC_ANALYZER_DEBUG
         PORTF &= ~(1 << PF7);
+        #endif
+        
         USB_USBTask();
     }
 }
