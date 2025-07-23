@@ -152,7 +152,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                                          void* ReportData,
                                          uint16_t* const ReportSize)
 {
-    PORTF &= ~(1 << PF7);
+    
     USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
     memset(Rpt, 0, sizeof(*Rpt));
     uint8_t rpt_idx = 0;
@@ -179,7 +179,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
 
     *ReportSize = sizeof(*Rpt);
     
-    PORTF |= (1 << PF7);
+    
     return false;
 }
 

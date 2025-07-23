@@ -74,7 +74,7 @@ const uint8_t KEYMAP[NUM_KEYS] = {
  *        common actuation instead of per-key       *
  *        actuation.                                *
  ****************************************************/
-// #define USE_COMMON_ACTUATION
+#define USE_COMMON_ACTUATION
 #define COMMON_ACTUATION \
         MM(1.5)
 
@@ -113,5 +113,6 @@ const uint8_t ACTUATIONS[NUM_KEYS] = {
 
 #define RAPID_TRIGGER_DIRECTION_HYSTERESIS \
         MS(2)
+
 
 #endif /* KEYBOARDCONFIG_H */

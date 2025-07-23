@@ -23,7 +23,16 @@ Since I have used the PlatformIO toolchain for the entirety of the development p
 7. Wait a few seconds and your microcontroller will be recognized as `GoonMandu GoonBoard` with VID:PID `2B00:B1E5`.
 
 ## Performance
-- Polling rate: 1000 Hz
+Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz.
+- Fixed-length USB background task: ~63 µs
+- Additional time required to process one more key:
+  - Rapid trigger OFF: 5.083 µs (~81 clocks)
+  - Rapid trigger ON: 8.333 µs (~133 clocks)
+- Upper bound for number of keys while staying within polling rate:
+  - 1000 Hz = 1 ms = 1000 µs (per USB poll)
+  - Time budget left: 1000 - 63 = 937 µs
+    - Rapid trigger OFF: 937 / 5.083 = 184, ~160 keys to be safe
+    - Rapid trigger ON: 937 / 8.333 = 112, ~97 keys to be safe
 
 ## Pin Assignments
 TODO

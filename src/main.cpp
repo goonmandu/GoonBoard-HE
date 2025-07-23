@@ -31,7 +31,9 @@ int main(void) {
     GlobalInterruptEnable();
 
     while (1) {
+        PORTF |= (1 << PF7);
         HID_Device_USBTask(&Keyboard_HID_Interface);
+        PORTF &= ~(1 << PF7);
         USB_USBTask();
     }
 }
