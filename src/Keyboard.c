@@ -44,13 +44,10 @@ uint8_t PrevKeyboardHIDReportBuffer[sizeof(USB_KeyboardReport_Data_t)];
 
 /* START CUSTOMIZATION CODE */
 
-// Variables to implement Hall-Effect
+// Variables to detect keypresses
 extern uint8_t adc_values[NUM_KEYS];
-// extern uint8_t old_values[NUM_KEYS];
-// extern uint8_t adc_maxima[NUM_KEYS];
-// extern uint8_t adc_minima[NUM_KEYS];
-// extern uint8_t key_actions[NUM_KEYS];
 extern uint8_t key_status[NUM_KEYS];
+extern uint8_t ADC_BASELINE[NUM_KEYS];
 
 /* END CUSTOMIZATION CODE */
 
@@ -59,84 +56,84 @@ extern uint8_t key_status[NUM_KEYS];
  *  within a device can be differentiated from one another.
  */
 USB_ClassInfo_HID_Device_t Keyboard_HID_Interface =
-	{
-		.Config =
-			{
-				.InterfaceNumber              = INTERFACE_ID_Keyboard,
-				.ReportINEndpoint             =
-					{
-						.Address              = KEYBOARD_EPADDR,
-						.Size                 = KEYBOARD_EPSIZE,
-						.Banks                = 1,
-					},
-				.PrevReportINBuffer           = PrevKeyboardHIDReportBuffer,
-				.PrevReportINBufferSize       = sizeof(PrevKeyboardHIDReportBuffer),
-			},
-	};
+    {
+        .Config =
+            {
+                .InterfaceNumber              = INTERFACE_ID_Keyboard,
+                .ReportINEndpoint             =
+                    {
+                        .Address              = KEYBOARD_EPADDR,
+                        .Size                 = KEYBOARD_EPSIZE,
+                        .Banks                = 1,
+                    },
+                .PrevReportINBuffer           = PrevKeyboardHIDReportBuffer,
+                .PrevReportINBufferSize       = sizeof(PrevKeyboardHIDReportBuffer),
+            },
+    };
 
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
 void SetupHardware()
 {
 #if (ARCH == ARCH_AVR8)
-	/* Disable watchdog if enabled by bootloader/fuses */
-	MCUSR &= ~(1 << WDRF);
-	wdt_disable();
+    /* Disable watchdog if enabled by bootloader/fuses */
+    MCUSR &= ~(1 << WDRF);
+    wdt_disable();
 
-	/* Disable clock division */
-	clock_prescale_set(clock_div_1);
+    /* Disable clock division */
+    clock_prescale_set(clock_div_1);
 #elif (ARCH == ARCH_XMEGA)
-	/* Start the PLL to multiply the 2MHz RC oscillator to 32MHz and switch the CPU core to run from it */
-	XMEGACLK_StartPLL(CLOCK_SRC_INT_RC2MHZ, 2000000, F_CPU);
-	XMEGACLK_SetCPUClockSource(CLOCK_SRC_PLL);
+    /* Start the PLL to multiply the 2MHz RC oscillator to 32MHz and switch the CPU core to run from it */
+    XMEGACLK_StartPLL(CLOCK_SRC_INT_RC2MHZ, 2000000, F_CPU);
+    XMEGACLK_SetCPUClockSource(CLOCK_SRC_PLL);
 
-	/* Start the 32MHz internal RC oscillator and start the DFLL to increase it to 48MHz using the USB SOF as a reference */
-	XMEGACLK_StartInternalOscillator(CLOCK_SRC_INT_RC32MHZ);
-	XMEGACLK_StartDFLL(CLOCK_SRC_INT_RC32MHZ, DFLL_REF_INT_USBSOF, F_USB);
+    /* Start the 32MHz internal RC oscillator and start the DFLL to increase it to 48MHz using the USB SOF as a reference */
+    XMEGACLK_StartInternalOscillator(CLOCK_SRC_INT_RC32MHZ);
+    XMEGACLK_StartDFLL(CLOCK_SRC_INT_RC32MHZ, DFLL_REF_INT_USBSOF, F_USB);
 
-	PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
+    PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 #endif
 
-	/* Hardware Initialization */
-	// Joystick_Init();
-	// LEDs_Init();
-	// Buttons_Init();
-	USB_Init();
+    /* Hardware Initialization */
+    // Joystick_Init();
+    // LEDs_Init();
+    // Buttons_Init();
+    USB_Init();
 }
 
 /** Event handler for the library USB Connection event. */
 void EVENT_USB_Device_Connect(void)
 {
-	// LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
+    // LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
 }
 
 /** Event handler for the library USB Disconnection event. */
 void EVENT_USB_Device_Disconnect(void)
 {
-	// LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+    // LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
 }
 
 /** Event handler for the library USB Configuration Changed event. */
 void EVENT_USB_Device_ConfigurationChanged(void)
 {
-	bool ConfigSuccess = true;
+    bool ConfigSuccess = true;
 
-	ConfigSuccess &= HID_Device_ConfigureEndpoints(&Keyboard_HID_Interface);
+    ConfigSuccess &= HID_Device_ConfigureEndpoints(&Keyboard_HID_Interface);
 
-	USB_Device_EnableSOFEvents();
+    USB_Device_EnableSOFEvents();
 
-	// LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
+    // LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
 }
 
 /** Event handler for the library USB Control Request reception event. */
 void EVENT_USB_Device_ControlRequest(void)
 {
-	HID_Device_ProcessControlRequest(&Keyboard_HID_Interface);
+    HID_Device_ProcessControlRequest(&Keyboard_HID_Interface);
 }
 
 /** Event handler for the USB device Start Of Frame event. */
 void EVENT_USB_Device_StartOfFrame(void)
 {
-	HID_Device_MillisecondElapsed(&Keyboard_HID_Interface);
+    HID_Device_MillisecondElapsed(&Keyboard_HID_Interface);
 }
 
 /** HID class driver callback function for the creation of HID reports to the host.
@@ -155,35 +152,35 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                                          void* ReportData,
                                          uint16_t* const ReportSize)
 {
-	PORTF &= ~(1 << PF7);
-	USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
-	memset(Rpt, 0, sizeof(*Rpt));
-	uint8_t rpt_idx = 0;
+    PORTF &= ~(1 << PF7);
+    USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
+    memset(Rpt, 0, sizeof(*Rpt));
+    uint8_t rpt_idx = 0;
 
-	/* CORE KEY SCANNING LOGIC*/
-	scan_keys();
+    /* CORE KEY SCANNING LOGIC*/
+    scan_keys();
 
-	if (RAPID_TRIGGER_ENABLED) {
-		// Rapid Trigger
-		for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
-			if (key_status[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
-		}
-	}
-	else {
-		// Fixed Actuation
-		for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
-			#ifdef USE_COMMON_ACTUATION
-			if (adc_values[mux_idx] <= COMMON_ACTUATION) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
-			#else
-			if (adc_values[mux_idx] <= ACTUATIONS[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
-			#endif /* USE_COMMON_ACTUATION */
-		}
-	}
+    if (RAPID_TRIGGER_ENABLED) {
+        // Rapid Trigger
+        for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
+            if (key_status[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
+        }
+    }
+    else {
+        // Fixed Actuation
+        for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
+            #ifdef USE_COMMON_ACTUATION
+            if (ADC_BASELINE[mux_idx] - adc_values[mux_idx] >= COMMON_ACTUATION) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
+            #else
+            if (ADC_BASELINE[mux_idx] - adc_values[mux_idx] >= ACTUATIONS[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
+            #endif /* USE_COMMON_ACTUATION */
+        }
+    }
 
-	*ReportSize = sizeof(*Rpt);
-	
-	PORTF |= (1 << PF7);
-	return false;
+    *ReportSize = sizeof(*Rpt);
+    
+    PORTF |= (1 << PF7);
+    return false;
 }
 
 
@@ -201,20 +198,20 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const void* ReportData,
                                           const uint16_t ReportSize)
 {
-	/*
-	uint8_t  LEDMask   = LEDS_NO_LEDS;
-	uint8_t* LEDReport = (uint8_t*)ReportData;
+    /*
+    uint8_t  LEDMask   = LEDS_NO_LEDS;
+    uint8_t* LEDReport = (uint8_t*)ReportData;
 
-	if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
-	  LEDMask |= LEDS_LED1;
+    if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
+      LEDMask |= LEDS_LED1;
 
-	if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
-	  LEDMask |= LEDS_LED3;
+    if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
+      LEDMask |= LEDS_LED3;
 
-	if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
-	  LEDMask |= LEDS_LED4;
+    if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
+      LEDMask |= LEDS_LED4;
 
-	LEDs_SetAllLEDs(LEDMask);
-	 */
+    LEDs_SetAllLEDs(LEDMask);
+     */
 }
 
