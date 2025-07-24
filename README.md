@@ -35,10 +35,28 @@ Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz.
     - Rapid trigger ON: 937 / 8.333 = 112, ~97 keys to be safe
 
 ## Pin Assignments
-TODO
+| AVR | Pro Micro | Function | Notes |
+|-|-|-|-|
+| PD0 | TXO | Mux S0 |
+| PD1 | RXI | Mux S1 |
+| PD2 | 2 | Mux S2 |
+| PD3 | 3 | Mux S3 |
+| PC6 | 5 | RT Enable | Internal Pull-up |
+| PB6 | 10 | SPI /SS |
+| PB3 | 14 | SPI MISO |
+| PB1 | 15 | SPI SCLK |
+| *PF7* | *A0* | *Debug* | Omitted in release binaries.<br>Only used if `LOGIC_ANALYZER_DEBUG` is defined. |
 
-## Memory Footprint
-TODO
+## Versioning
+Format:
+```
+V{compat}.{YY}{MM}{DD}.{n}
+```
+- `compat`: Integer. This changing means that the hardware/timing compatibility or pin assignments have changed and is not physically compatible with other `compat` versions.
+- `YY`: Two-digit year.
+- `MM`: Zero-padded month.
+- `DD`: Zero-padded day.
+- `n`: Integer. Release number in the same day.
 
 ## Maintenance? PRs? Issues?
 I will not be paying much attention to this repository once I have implemented the features I want so they will probably be ignored. If you want to build upon this repository and want clarification, *please* feel free to annoy me at:
