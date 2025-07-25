@@ -15,15 +15,13 @@ int main(void) {
     PORTB |= (1 << PB0);
     PORTD |= (1 << PD5);
 
-    // PF7 is Logic Analyzer Debug Bit
-    DDRF |= (1 << PF7);
+    // DDRD |= (1 << PD4);
 
     // PC6 is Rapid-Trigger Enable
     DDRC &= ~(1 << PC6);  // Set PC6 as input
     PORTC |= (1 << PC6);  // Enable pull-up
 
     spi_init_master();
-    // i2c_init_master();
     setup_mux_pins();
 
     measure_adc_baseline();
@@ -31,16 +29,7 @@ int main(void) {
     GlobalInterruptEnable();
 
     while (1) {
-        #ifdef LOGIC_ANALYZER_DEBUG
-        PORTF |= (1 << PF7);
-        #endif
-
         HID_Device_USBTask(&Keyboard_HID_Interface);
-
-        #ifdef LOGIC_ANALYZER_DEBUG
-        PORTF &= ~(1 << PF7);
-        #endif
-        
         USB_USBTask();
     }
 }

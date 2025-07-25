@@ -22,6 +22,7 @@
 
 // Refer to "lib/LUFA/Drivers/USB/Class/Common/HIDClassCommon.h" for the key names.
 // The KEY(NAME) macro just appends "HID_KEYBOARD_SC_" to the NAME argument.
+#define HID_KEYBOARD_NO 0x00
 #define KEY(NAME) HID_KEYBOARD_SC_##NAME
 
 
@@ -45,6 +46,8 @@
  *        keymap and actuation arrays!             *
  ***************************************************/
 #define NUM_KEYS 4
+#define NUM_ROWS 6
+#define NUM_KEYS_PER_ROW 16
 
 
 /****************************************************
@@ -60,6 +63,15 @@ const uint8_t KEYMAP[NUM_KEYS] = {
     KEY(S),
     KEY(D),
     KEY(F),
+};
+
+const uint8_t KEYMAP_MATRIX[NUM_ROWS][NUM_KEYS_PER_ROW] = {
+    {KEY(Q), KEY(W), KEY(E), KEY(0_AND_CLOSING_PARENTHESIS)},
+    {KEY(R), KEY(T), KEY(Y), KEY(1_AND_EXCLAMATION)},
+    {KEY(A), KEY(S), KEY(D)},
+    {KEY(F), KEY(G), KEY(H)},
+    {KEY(Z), KEY(X), KEY(C)},
+    {KEY(V), KEY(B), KEY(N)}
 };
 
 
@@ -94,6 +106,27 @@ const uint8_t ACTUATIONS[NUM_KEYS] = {
     MM(2.0),
     MM(2.5),
 };
+
+const uint8_t ACTUATIONS_MATRIX[NUM_ROWS][NUM_KEYS_PER_ROW] = {
+    {MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
+     MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)},
+     
+    {MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
+     MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)},
+     
+    {MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
+     MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)},
+     
+    {MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
+     MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)},
+     
+    {MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
+     MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)},
+     
+    {MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
+     MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)}
+};
+
 #endif /* USE_COMMON_ACTUATION */
 
 
