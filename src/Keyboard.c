@@ -45,9 +45,9 @@ uint8_t PrevKeyboardHIDReportBuffer[sizeof(USB_KeyboardReport_Data_t)];
 /* START CUSTOMIZATION CODE */
 
 // Variables to detect keypresses
-extern uint8_t adc_values[NUM_ROWS][NUM_KEYS_PER_ROW];
-extern uint8_t key_status[NUM_ROWS][NUM_KEYS_PER_ROW];
-extern uint8_t ADC_BASELINE[NUM_ROWS][NUM_KEYS_PER_ROW];
+extern uint8_t adc_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern uint8_t key_status[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 
 /* END CUSTOMIZATION CODE */
 
@@ -160,28 +160,20 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
     /* CORE KEY SCANNING LOGIC*/
     scan_keys();
 
+    // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
+    // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
     if (RAPID_TRIGGER_ENABLED) {
         // Rapid Trigger
-        // for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
-        //     if (key_status[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
-        // }
         for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-            for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW; ++key_idx) {
+            for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
                 if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
             }
         }
     }
     else {
         // Fixed Actuation
-        // for (uint8_t mux_idx = 0; (mux_idx < NUM_KEYS) && (rpt_idx < 16); ++mux_idx) {
-        //     #ifdef USE_COMMON_ACTUATION
-        //     if (ADC_BASELINE[mux_idx] - adc_values[mux_idx] >= COMMON_ACTUATION) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
-        //     #else
-        //     if (ADC_BASELINE[mux_idx] - adc_values[mux_idx] >= ACTUATIONS[mux_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP[mux_idx];
-        //     #endif /* USE_COMMON_ACTUATION */
-        // }
         for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-            for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW; ++key_idx) {
+            for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
                 #ifdef USE_COMMON_ACTUATION
                 if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= COMMON_ACTUATION)
                     Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];

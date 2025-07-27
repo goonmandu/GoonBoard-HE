@@ -45,9 +45,19 @@
  *        change the number of elements on the     *
  *        keymap and actuation arrays!             *
  ***************************************************/
-#define NUM_KEYS 4
+#define MAX_KEYS_SUPPORTED_PER_ROW 16
 #define NUM_ROWS 6
-#define NUM_KEYS_PER_ROW 16
+const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
+    13, 15, 15, 14, 14, 10  // 75%, 81 keys
+};
+
+/*
+#define NUM_ROWS 5
+#define MAX_KEYS_SUPPORTED_PER_ROW 16
+const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
+    15, 15, 14, 14, 10  // 65%, 68 keys
+};
+ */
 
 
 /****************************************************
@@ -58,16 +68,9 @@
  *        The first entry maps to C0, second C1,    *
  *        and so on.                                *
  ****************************************************/
-const uint8_t KEYMAP[NUM_KEYS] = {
-    KEY(A),
-    KEY(S),
-    KEY(D),
-    KEY(F),
-};
-
-const uint8_t KEYMAP_MATRIX[NUM_ROWS][NUM_KEYS_PER_ROW] = {
-    {KEY(Q), KEY(W), KEY(E), KEY(0_AND_CLOSING_PARENTHESIS)},
-    {KEY(R), KEY(T), KEY(Y), KEY(1_AND_EXCLAMATION)},
+const uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
+    {KEY(Q), KEY(W), KEY(E), KEY(LEFT_SHIFT)},
+    {KEY(R), KEY(T), KEY(Y), KEY(SPACE)},
     {KEY(A), KEY(S), KEY(D)},
     {KEY(F), KEY(G), KEY(H)},
     {KEY(Z), KEY(X), KEY(C)},

@@ -14,19 +14,19 @@
 
 #define RAPID_TRIGGER_ENABLED (!(PINC & (1 << PC6)))
 
-uint8_t adc_values[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t old_values[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t adc_maxima[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t adc_minima[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t key_actions[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t key_status[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t key_idle_for[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t key_being_pressed_for[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t key_being_released_for[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t candidate_maxima[NUM_ROWS][NUM_KEYS_PER_ROW];
-uint8_t candidate_minima[NUM_ROWS][NUM_KEYS_PER_ROW];
+uint8_t adc_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t old_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t adc_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t adc_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t key_actions[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t key_status[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t key_idle_for[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t key_being_pressed_for[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t key_being_released_for[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t candidate_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t candidate_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 
-uint8_t ADC_BASELINE[NUM_ROWS][NUM_KEYS_PER_ROW];
+uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 
 void setup_mux_pins() {
     DDRD |= 0x1F;  // Row select Mux: PD3-0
@@ -37,7 +37,7 @@ void scan_keys() {
     static uint8_t current_adc_reading;
     for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
         PORTD = row_idx | (1 << PD5);
-        for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW; ++key_idx) {
+        for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW[row_idx]; ++key_idx) {
             // Store old values for comparison
             old_values[row_idx][key_idx] = adc_values[row_idx][key_idx];
 
@@ -55,7 +55,7 @@ void scan_keys() {
             if (!RAPID_TRIGGER_ENABLED) continue;
 
             // Rapid Trigger Enabled: Right LED
-            PORTD &= ~(1 << PD5);
+            // PORTD &= ~(1 << PD5);
 
             // Rapid Trigger!
             // If key is idle, skip and move to next key
@@ -122,7 +122,7 @@ void scan_keys() {
                 key_status[row_idx][key_idx] = RELEASED;
             }
             // Rapid Trigger Enabled: Right LED
-            PORTD |= (1 << PD5);
+            // PORTD |= (1 << PD5);
         }
     }
 }
@@ -134,7 +134,7 @@ void scan_keys() {
 void measure_adc_baseline() {
     for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
         PORTD = row_idx | (1 << PD5);
-        for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW; ++key_idx) {
+        for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW[row_idx]; ++key_idx) {
             PORTF = key_idx << 4;
             spi_select_slave();
             ADC_BASELINE[row_idx][key_idx] = (spi_read() << 1) | (spi_read() == 0x80);
