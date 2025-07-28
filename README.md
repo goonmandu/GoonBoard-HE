@@ -27,7 +27,7 @@ Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz.
 
 | Metric | RT On | RT Off |
 |-|-|-|
-| USB HID Report Generation | 936 µs | 
+| USB HID Report Generation | ? | ? |
 
 ## Pin Assignments
 | AVR | Pro Micro | Function | Notes |

@@ -26,7 +26,7 @@ const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
 };
 #else
 const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
-    4, 4, 3, 3, 3, 3  // 75%, 81 keys
+    4, 4, 3, 3, 3, 3  // Development Only
 };
 #endif
 
