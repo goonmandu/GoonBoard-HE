@@ -112,15 +112,10 @@ void scan_keys() {
                     }
                     // If key was already being released, send release keystroke if
                     // delta(current, lowest) >= threshold
-                    if (current_adc_reading - adc_minima[row_idx][key_idx] >= RAPID_TRIGGER_THRESHOLD) {
+                    if (current_adc_reading - adc_minima[row_idx][key_idx] >= RAPID_TRIGGER_THRESHOLD \
+                        || current_adc_reading >= ADC_BASELINE[row_idx][key_idx] - RAPID_TRIGGER_THRESHOLD) {
                         key_status[row_idx][key_idx] = RELEASED;
                     }
-                }
-
-                // Finally, as hacky workaround to release "stuck" keys
-                if (current_adc_reading >= ADC_BASELINE[row_idx][key_idx] - RAPID_TRIGGER_THRESHOLD) {
-                    adc_maxima[row_idx][key_idx] = current_adc_reading;
-                    key_status[row_idx][key_idx] = RELEASED;
                 }
             }
         }
