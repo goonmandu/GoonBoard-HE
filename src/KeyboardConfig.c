@@ -1,38 +1,13 @@
-#ifndef KEYBOARDCONFIG_H
-#define KEYBOARDCONFIG_H
-
-#include "Keyboard.h"
-
-// This is defined as the required keypress depth.
-// For example, MM(0.5) means you have to press the key 0.5 mm for it to register as a press.
-// Valid range: 0.1 - 3.4 (for Gateron "Magnetic Jade Shaft" KS-20T switches)
-// ADC baselines when switch makes physical contact with sensor: 
-//     104 (0x68) when switch is fully released.
-//      68 (0x22) when switch is fully pressed.
-// Conversion factor: 1 ADC bit ≈ 0.1 mm travel for KS-20T.
-//
-// Notes:
-//   - Total travel: 3.5 mm
-//     (104 - 68) / 35 = ~1.03 bits per 0.1 mm
-//     Rounded to 1 bit per 0.1 mm for simplicity
-#define MM(MILLIMETERS) ((uint8_t)(MILLIMETERS*10))
-
-// Each USB frame happens every 1 ms.
-#define MS(MILLISECONDS) (MILLISECONDS)
-
-// Refer to "lib/LUFA/Drivers/USB/Class/Common/HIDClassCommon.h" for the key names.
-// The KEY(NAME) macro just appends "HID_KEYBOARD_SC_" to the NAME argument.
-#define HID_KEYBOARD_NO 0x00
-#define KEY(NAME) HID_KEYBOARD_SC_##NAME
-
-
+#include <stdint.h>
+#include "KeyboardConfig.h"
+#include "Keycodes.h"
 
 /***************************************************
  *      ┌──────────────────────────────────┐       *
  *      | KEYBOARD CONFIGURATION CONSTANTS |       *
  *      └──────────────────────────────────┘       *
- * Please read the stuff ^^up there^^ first before *
- *            doing any configuration!             *
+ *     Please read KeyboardConfig.h before any     *
+ *   customization as macros are very important!   *
  ***************************************************/
 
 
@@ -45,20 +20,9 @@
  *        change the number of elements on the     *
  *        keymap and actuation arrays!             *
  ***************************************************/
-#define MAX_KEYS_SUPPORTED_PER_ROW 16
-#define NUM_ROWS 6
 const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
     13, 15, 15, 14, 14, 10  // 75%, 81 keys
 };
-
-/*
-#define NUM_ROWS 5
-#define MAX_KEYS_SUPPORTED_PER_ROW 16
-const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
-    15, 15, 14, 14, 10  // 65%, 68 keys
-};
- */
-
 
 /****************************************************
  * KEYMAP: Map which MUX channel to which keycode?  *
@@ -69,14 +33,13 @@ const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
  *        and so on.                                *
  ****************************************************/
 const uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
-    {KEY(Q), KEY(W), KEY(E), KEY(LEFT_SHIFT)},
-    {KEY(R), KEY(T), KEY(Y), KEY(SPACE)},
-    {KEY(A), KEY(S), KEY(D)},
-    {KEY(F), KEY(G), KEY(H)},
-    {KEY(Z), KEY(X), KEY(C)},
-    {KEY(V), KEY(B), KEY(N)}
+    {HID_KEYBOARD_SC_Q , KC_W, KC_E, KC_LSHIFT},
+    {KC_R, KC_T, KC_Y, KC_SPACE},
+    {KC_A, KC_S, KC_D},
+    {KC_F, KC_G, KC_H},
+    {KC_Z, KC_X, KC_C},
+    {KC_V, KC_B, KC_N}
 };
-
 
 /****************************************************
  * COMMON_ACTUATION: Actuation point for all keys?  *
@@ -89,28 +52,12 @@ const uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
  *        common actuation instead of per-key       *
  *        actuation.                                *
  ****************************************************/
-#define USE_COMMON_ACTUATION
-#define COMMON_ACTUATION \
-        MM(1.5)
+const uint8_t COMMON_ACTUATION = MM(1.5);
 
-
-/****************************************************
- * ACTUATIONS: Actuation point for each key?        *
- ****************************************************
- * Notes: Make sure the number of actuation points  *
- *        in this array matches NUM_KEYS!           *
- *        The first entry maps to C0, second C1,    *
- *        and so on.                                *
- ****************************************************/
+// To allow per-key actuation, go to `include/KeyboardConfig.h`
+// and comment out `#define USE_COMMON_ACTUATION`.
 #ifndef USE_COMMON_ACTUATION
-const uint8_t ACTUATIONS[NUM_KEYS] = {
-    MM(1.0),
-    MM(1.5),
-    MM(2.0),
-    MM(2.5),
-};
-
-const uint8_t ACTUATIONS_MATRIX[NUM_ROWS][NUM_KEYS_PER_ROW] = {
+const uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
     {MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
      MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)},
      
@@ -129,26 +76,10 @@ const uint8_t ACTUATIONS_MATRIX[NUM_ROWS][NUM_KEYS_PER_ROW] = {
     {MM(1.5), MM(1.5), MM(1.5), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9),
      MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9), MM(6.9)}
 };
-
 #endif /* USE_COMMON_ACTUATION */
 
-
-/*****************************************************
- * RAPID_TRIGGER Configurations                      *
- *****************************************************
- * Notes: TODO                                       *
- *****************************************************/
-#define RAPID_TRIGGER_THRESHOLD \
-        MM(0.3)
-
-#define RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD \
-        MM(0.5)
-
-#define RAPID_TRIGGER_IDLE_HYSTERESIS \
-        MS(35)
-
-#define RAPID_TRIGGER_DIRECTION_HYSTERESIS \
-        MS(2)
-
-
-#endif /* KEYBOARDCONFIG_H */
+// Rapid Trigger
+const uint8_t RAPID_TRIGGER_THRESHOLD =                 MM(0.3);
+const uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD =   MM(0.5);
+const uint8_t RAPID_TRIGGER_IDLE_HYSTERESIS =           MS(35);
+const uint8_t RAPID_TRIGGER_DIRECTION_HYSTERESIS =      MS(2);

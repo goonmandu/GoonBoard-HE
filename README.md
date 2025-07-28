@@ -37,7 +37,7 @@ Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz.
 ## Pin Assignments
 | AVR | Pro Micro | Function | Notes |
 |-|-|-|-|
-| PD0 | TXO | Mux S0 |
+| PD0 | TXO | Row Mux S0 |
 | PD1 | RXI | Mux S1 |
 | PD2 | 2 | Mux S2 |
 | PD3 | 3 | Mux S3 |
