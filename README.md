@@ -24,28 +24,27 @@ Since I have used the PlatformIO toolchain for the entirety of the development p
 
 ## Performance
 Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz.
-- Fixed-length USB background task: ~63 µs
-- Additional time required to process one more key:
-  - Rapid trigger OFF: 5.083 µs (~81 clocks)
-  - Rapid trigger ON: 8.333 µs (~133 clocks)
-- Upper bound for number of keys while staying within polling rate:
-  - 1000 Hz = 1 ms = 1000 µs (per USB poll)
-  - Time budget left: 1000 - 63 = 937 µs
-    - Rapid trigger OFF: 937 / 5.083 = 184, ~160 keys to be safe
-    - Rapid trigger ON: 937 / 8.333 = 112, ~97 keys to be safe
+
+| Metric | RT On | RT Off |
+|-|-|-|
+| USB HID Report Generation | 936 µs | 
 
 ## Pin Assignments
 | AVR | Pro Micro | Function | Notes |
 |-|-|-|-|
 | PD0 | TXO | Row Mux S0 |
-| PD1 | RXI | Mux S1 |
-| PD2 | 2 | Mux S2 |
-| PD3 | 3 | Mux S3 |
+| PD1 | RXI | Row Mux S1 |
+| PD2 | 2 | Row Mux S2 |
+| PD3 | 3 | Row Mux S3 |
+| PF4 | A3 | Key Mux S0 |
+| PF5 | A2 | Key Mux S1 |
+| PF6 | A1 | Key Mux S2 |
+| PF7 | A0 | Key Mux S3 |
 | PC6 | 5 | RT Enable | Internal Pull-up |
 | PB6 | 10 | SPI /SS |
 | PB3 | 14 | SPI MISO |
 | PB1 | 15 | SPI SCLK |
-| *PF7* | *A0* | *Debug* | Omitted in release binaries.<br>Only used if `LOGIC_ANALYZER_DEBUG` is defined. |
+| *PE6* | *7* | *Debug* | Omitted in release binaries.<br>Only used if `LOGIC_ANALYZER_DEBUG` is defined. |
 
 ## Versioning
 Format:

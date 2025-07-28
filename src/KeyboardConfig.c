@@ -20,8 +20,13 @@
  *        change the number of elements on the     *
  *        keymap and actuation arrays!             *
  ***************************************************/
+/*
 const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
     13, 15, 15, 14, 14, 10  // 75%, 81 keys
+};
+ */
+const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
+    4, 4, 3, 3, 3, 3  // 75%, 81 keys
 };
 
 /****************************************************
@@ -33,7 +38,7 @@ const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
  *        and so on.                                *
  ****************************************************/
 const uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
-    {HID_KEYBOARD_SC_Q , KC_W, KC_E, KC_LSHIFT},
+    {KC_Q, KC_W, KC_E, KC_LSHIFT},
     {KC_R, KC_T, KC_Y, KC_SPACE},
     {KC_A, KC_S, KC_D},
     {KC_F, KC_G, KC_H},
@@ -80,6 +85,6 @@ const uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
 
 // Rapid Trigger
 const uint8_t RAPID_TRIGGER_THRESHOLD =                 MM(0.3);
-const uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD =   MM(0.5);
+const uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD =   MM(0.3);
 const uint8_t RAPID_TRIGGER_IDLE_HYSTERESIS =           MS(35);
-const uint8_t RAPID_TRIGGER_DIRECTION_HYSTERESIS =      MS(2);
+const uint8_t RAPID_TRIGGER_DIRECTION_HYSTERESIS =      MS(3);

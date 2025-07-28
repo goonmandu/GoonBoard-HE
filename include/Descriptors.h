@@ -81,7 +81,7 @@
         #define KEYBOARD_EPADDR              (ENDPOINT_DIR_IN | 1)
 
         /** Size in bytes of the Keyboard HID reporting IN endpoint. */
-        #define KEYBOARD_EPSIZE              8
+        #define KEYBOARD_EPSIZE              (MAX_NKRO + 2)
 
     /* Function Prototypes: */
     /*

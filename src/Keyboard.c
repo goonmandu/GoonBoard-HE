@@ -48,6 +48,7 @@ uint8_t PrevKeyboardHIDReportBuffer[sizeof(USB_KeyboardReport_Data_t)];
 extern uint8_t adc_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t key_status[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+static volatile uint8_t rpt_idx = 0;
 
 /* END CUSTOMIZATION CODE */
 
@@ -155,38 +156,20 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
     
     USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
     memset(Rpt, 0, sizeof(*Rpt));
-    uint8_t rpt_idx = 0;
+    rpt_idx = 0;
 
     /* CORE KEY SCANNING LOGIC*/
     scan_keys();
 
     // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
     // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
-    if (RAPID_TRIGGER_ENABLED) {
-        // Rapid Trigger
-        for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-            for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
-                if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
-            }
-        }
-    }
-    else {
-        // Fixed Actuation
-        for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-            for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
-                #ifdef USE_COMMON_ACTUATION
-                if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= COMMON_ACTUATION)
-                    Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
-                #else
-                if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= ACTUATIONS_MATRIX[row_idx][key_idx])
-                    Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
-                #endif /* USE_COMMON_ACTUATION */
-            }
+    for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
+        for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW && rpt_idx < MAX_NKRO; ++key_idx) {
+            if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
         }
     }
 
     *ReportSize = sizeof(*Rpt);
-    
     
     return false;
 }

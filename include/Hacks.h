@@ -1,5 +1,5 @@
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef HACKS_H
+#define HACKS_H
 
 
 #ifdef LOGIC_ANALYZER_DEBUG
@@ -21,5 +21,7 @@
     #define CLEAR_DEBUG_BIT
 #endif /* LOGIC_ANALYZER_DEBUG */
 
+#define ASM_NOP asm volatile ("nop\n\t")
 
-#endif /* DEBUG_H */
+
+#endif /* HACKS_H */

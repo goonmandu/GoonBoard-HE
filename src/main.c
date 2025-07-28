@@ -2,7 +2,7 @@
 #include "SPI.h"
 #include "I2C.h"
 #include "MatrixScanner.h"
-#include "Debug.h"
+#include "Hacks.h"
 
 extern uint8_t PrevKeyboardHIDReportBuffer[sizeof(USB_KeyboardReport_Data_t)];
 extern USB_ClassInfo_HID_Device_t Keyboard_HID_Interface;

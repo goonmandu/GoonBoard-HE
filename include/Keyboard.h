@@ -32,7 +32,6 @@
 extern "C" {
 #endif
 
-
 /** \file
  *
  *  Header file for Keyboard.c.
