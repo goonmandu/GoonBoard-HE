@@ -2,7 +2,7 @@
 #define HACKS_H
 
 
-#ifdef LOGIC_ANALYZER_DEBUG
+#ifdef DEBUG
     // PE6 is Logic Analyzer Debug Bit
     #define DEBUG_BIT_PIN_CONFIG do { \
         DDRE |= (1 << PE6);           \
