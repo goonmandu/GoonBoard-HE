@@ -20,6 +20,37 @@ void setup_mux_pins(void) {
     DDRF |= 0xF0;  // Key select Mux: PF7-4
 }
 
+void setup_led_pins(void) {
+    DDRE |= (1 << PE6);
+    DDRB |= (1 << PB4) | (1 << PB5);
+    PORTE &= ~(1 << PE6);
+    PORTB &= ~(1 << PB4 | 1 << PB5);
+}
+
+void capslock_on(void) {
+    PORTE |= (1 << PE6);
+}
+
+void capslock_off(void) {
+    PORTE &= ~(1 << PE6);
+}
+
+void numlock_on(void) {
+    PORTB |= (1 << PB4);
+}
+
+void numlock_off(void) {
+    PORTB &= ~(1 << PB4);
+}
+
+void scrlock_on(void) {
+    PORTB |= (1 << PB5);
+}
+
+void scrlock_off(void) {
+    PORTB &= ~(1 << PB5);
+}
+
 void scan_keys() {
     static uint8_t current_adc_reading;
     for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {

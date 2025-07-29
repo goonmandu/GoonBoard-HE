@@ -7,4 +7,4 @@ platformio.ini
 
 schem/*
 !schem/pdfs/
-!schem/schem.kicad*
+!schem/schem.kicad*a

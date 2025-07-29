@@ -24,6 +24,7 @@ int main(void) {
 
     spi_init_master();
     setup_mux_pins();
+    setup_led_pins();
 
     measure_adc_baseline();
     

@@ -189,20 +189,23 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const void* ReportData,
                                           const uint16_t ReportSize)
 {
-    /*
-    uint8_t  LEDMask   = LEDS_NO_LEDS;
     uint8_t* LEDReport = (uint8_t*)ReportData;
 
     if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
-      LEDMask |= LEDS_LED1;
+        numlock_on();
+    else
+        numlock_off();
+
 
     if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
-      LEDMask |= LEDS_LED3;
+        capslock_on();
+    else
+        capslock_off();
+        
 
     if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
-      LEDMask |= LEDS_LED4;
-
-    LEDs_SetAllLEDs(LEDMask);
-     */
+        scrlock_on();
+    else
+        scrlock_off();
 }
 

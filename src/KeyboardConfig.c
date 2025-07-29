@@ -20,7 +20,7 @@
  *        change the number of elements on the     *
  *        keymap and actuation arrays!             *
  ***************************************************/
-#ifndef DEBUG
+#ifndef PROTO_BOARD
 const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
     13, 15, 15, 14, 14, 10  // 75%, 81 keys
 };
@@ -38,7 +38,7 @@ const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
  *        The first entry maps to C0, second C1,    *
  *        and so on.                                *
  ****************************************************/
-#ifndef DEBUG
+#ifndef PROTO_BOARD
 const uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = {
     {KC_ESCAPE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12},
     {KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINUS, KC_EQUAL, KC_BACKSPACE, KC_DELETE},

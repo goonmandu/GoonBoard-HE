@@ -29,6 +29,13 @@ extern uint8_t candidate_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 
 void setup_mux_pins(void);
+void setup_led_pins(void);
+void capslock_on(void);
+void capslock_off(void);
+void numlock_on(void);
+void numlock_off(void);
+void scrlock_on(void);
+void scrlock_off(void);
 void scan_keys(void);
 void measure_adc_baseline(void);
 
