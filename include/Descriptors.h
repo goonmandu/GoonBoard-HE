@@ -38,7 +38,7 @@
 
     /* Includes: */
         #include <avr/pgmspace.h>
-
+        #include "KeyboardConfig.h"
         #include "../lib/LUFA/Drivers/USB/USB.h"
 
     /* Type Defines: */
@@ -82,6 +82,27 @@
 
         /** Size in bytes of the Keyboard HID reporting IN endpoint. */
         #define KEYBOARD_EPSIZE              (MAX_NKRO + 2)
+
+    /* Report ID Codes */
+        /** Keyboard Lock LEDs Request */
+        #define LOCK_LEDS_REPORT_ID                 0x00
+
+        /** LUFA handles non-Keyboard Lock LED reports differently;
+         *  it subtracts 1 from ReportSize for other SetReports.
+         *  Like, I love your library and thank you for making my
+         *  entire keyboard project possible. But why?
+         */
+        /** Runtime Keymap Edit Request */
+        #define EDIT_KEYMAP_REPORT_ID               0x01
+        #define EDIT_KEYMAP_PARAMETERS_BYTES        3
+
+        /** Runtime Actuation Edit Request */
+        #define EDIT_ACTUATIONS_REPORT_ID           0x02
+        #define EDIT_ACTUATIONS_PARAMETERS_BYTES    3
+
+        /** Runtime Fetch Configuration Request */
+        #define FETCH_CONFIG_REPORT_ID              0x03
+        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED + 2)
 
     /* Function Prototypes: */
     /*

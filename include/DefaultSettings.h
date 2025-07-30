@@ -1,0 +1,19 @@
+/* This file is only relevant when flashing the MCU. */
+
+#ifndef DEFAULTSETTINGS_H
+#define DEFAULTSETTINGS_H
+
+
+#include "KeyboardConfig.h"
+
+typedef struct {
+    uint8_t keymap[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+    uint8_t actuations[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+    uint8_t rt_threshold;
+    uint8_t rt_sc_threshold;
+} keyboard_settings_t;
+
+extern volatile EEMEM keyboard_settings_t default_settings;
+
+
+#endif

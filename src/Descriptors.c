@@ -44,12 +44,18 @@
  *  the device will send, and what it may be sent back from the host. Refer to the HID specification for
  *  more details on HID report descriptors.
  */
-const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] =
-{
-    /* Use the HID class driver's standard Keyboard report.
-     *   Max simultaneous keys: 6
-     */
-    HID_DESCRIPTOR_KEYBOARD(32)
+const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
+    // Report Protocol Keyboard HID
+    HID_DESCRIPTOR_KEYBOARD(32),
+    
+    // Fetch Configurations
+    0x85, FETCH_CONFIG_REPORT_ID,       // Report ID
+    0x09, 0x01,                         // Usage (Vendor‑defined)
+    0x15, 0x00,                         // Logical Min 0
+    0x26, 0xFF, 0x00,                   // Logical Max 255
+    0x75, 0x08,                         // Report Size = 8 bits
+    0x95, FETCH_CONFIG_REPORT_SIZE,     // Report Count = 194 fields
+    0xB1, 0x02                          // Feature (Data,Var,Abs)
 };
 
 /** Device descriptor structure. This descriptor, located in FLASH memory, describes the overall

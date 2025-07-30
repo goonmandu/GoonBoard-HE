@@ -30,17 +30,21 @@
 
 /** \file
  *
- *  Main source file for the Keyboard demo. This file contains the main tasks of
- *  the demo and is responsible for the initial application hardware configuration.
+ *  This file contains the main tasks of the keyboard and is responsible for the 
+ *  initial application hardware configuration.
  */
+
 
 #include "Keyboard.h"
 #include "SPI.h"
 #include "I2C.h"
 #include "MatrixScanner.h"
+#include "SettingsEditor.h"
+#include "DefaultSettings.h"
+#include "Hacks.h"
 
 /** Buffer to hold the previously generated Keyboard HID report, for comparison purposes inside the HID class driver. */
-uint8_t PrevKeyboardHIDReportBuffer[sizeof(USB_KeyboardReport_Data_t)];
+uint8_t PrevKeyboardHIDReportBuffer[1 + FETCH_CONFIG_REPORT_SIZE];
 
 /* START CUSTOMIZATION CODE */
 
@@ -153,7 +157,30 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                                          void* ReportData,
                                          uint16_t* const ReportSize)
 {
-    
+    if (ReportType == HID_REPORT_ITEM_Feature && *ReportID == FETCH_CONFIG_REPORT_ID) {
+        uint8_t* buf    = (uint8_t*)ReportData;
+        uint16_t offset = 0;
+
+        // 1) Copy keymap (6×16 = 96 bytes)
+        eeprom_read_block(buf + offset,
+                          (const void*)&default_settings.keymap[0][0],
+                          sizeof default_settings.keymap);
+        offset += sizeof default_settings.keymap;  // +96
+
+        // 2) Copy actuations (6×16 = 96 bytes)
+        eeprom_read_block(buf + offset,
+                          (const void*)&default_settings.actuations[0][0],
+                          sizeof default_settings.actuations);
+        offset += sizeof default_settings.actuations;  // +96 (now offset=192)
+
+        // 3) Copy thresholds (2 bytes)
+        buf[offset++] = eeprom_read_byte(&default_settings.rt_threshold);
+        buf[offset++] = eeprom_read_byte(&default_settings.rt_sc_threshold);
+
+        *ReportSize = offset;  // should be 194
+        return true;
+    }
+    // Process normal keyboard report
     USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
     memset(Rpt, 0, sizeof(*Rpt));
     rpt_idx = 0;
@@ -189,23 +216,59 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const void* ReportData,
                                           const uint16_t ReportSize)
 {
-    uint8_t* LEDReport = (uint8_t*)ReportData;
+    uint8_t* params;
+    // TODO: Implement EEPROM update functions as Feature SetReport.
+    switch (ReportID) {
+        // LED Status Update Report, size = 2
+        //
+        // Byte         0           1
+        // Meaning      ReportID    LED Bits
+        case LOCK_LEDS_REPORT_ID: {
+            uint8_t* LEDReport = (uint8_t*)ReportData;
+            if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
+                numlock_on();
+            else
+                numlock_off();
+            if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
+                capslock_on();
+            else
+                capslock_off();
+            if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
+                scrlock_on();
+            else
+                scrlock_off();
+            break;
+        }
 
-    if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
-        numlock_on();
-    else
-        numlock_off();
-
-
-    if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
-        capslock_on();
-    else
-        capslock_off();
+        // Keymap Edit Report, size = 4
+        //
+        // Byte         0           1           2           3
+        // Meaning      ReportID    Row         Key         KeyCode
+        case EDIT_KEYMAP_REPORT_ID: {
+            // Check for malformed keymap edit reports
+            if (ReportSize != EDIT_KEYMAP_PARAMETERS_BYTES) break;
+            params = (uint8_t*)ReportData;
+            save_keymap_to_eeprom(params[0], params[1], params[2]);
+            KEYMAP_MATRIX[params[0]][params[1]] = params[2];
+            break;
+        }
         
+        // Actuation Point Edit Report, size = 4
+        //
+        // Byte         0           1           2           3
+        // Meaning      ReportID    Row         Key         Actuation
+        case EDIT_ACTUATIONS_REPORT_ID: {
+            // Check for malformed actuation edit reports
+            if (ReportSize != EDIT_ACTUATIONS_PARAMETERS_BYTES) break;
+            params = (uint8_t*)ReportData;
+            save_actuation_to_eeprom(params[0], params[1], params[2]);
+            ACTUATIONS_MATRIX[params[0]][params[1]] = params[2];
+            break;
+        }
 
-    if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
-        scrlock_on();
-    else
-        scrlock_off();
+        // Unknown Report, skip
+        default: {
+            break;
+        }
+    }
 }
-

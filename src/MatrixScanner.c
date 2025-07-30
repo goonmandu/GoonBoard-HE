@@ -72,21 +72,12 @@ void scan_keys() {
             adc_values[row_idx][key_idx] = current_adc_reading;
             // Only execute rapid trigger part when enabled
             if (!RAPID_TRIGGER_ENABLED) {
-                #ifdef USE_COMMON_ACTUATION
-                if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= COMMON_ACTUATION) {
-                    key_status[row_idx][key_idx] = PRESSED;
-                }
-                else {
-                    key_status[row_idx][key_idx] = RELEASED;
-                }
-                #else
                 if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= ACTUATIONS_MATRIX[row_idx][key_idx]) {
                     key_status[row_idx][key_idx] = PRESSED;
                 }
                 else {
                     key_status[row_idx][key_idx] = RELEASED;
                 }
-                #endif /* USE_COMMON_ACTUATION */
             }
             else {
                 // Rapid Trigger!
@@ -158,6 +149,17 @@ void scan_keys() {
 // but before Global_Interrupt_Enable
 // in the setup portion.
 void measure_adc_baseline() {
+    // ADS7885 Power-up sequence
+    spi_select_slave();
+    spi_read();
+    spi_read();
+    spi_deselect_slave();
+
+    // Datasheet specifies max 0.8 usec between
+    // Power-up signal to being ready for data
+    _delay_us(1);
+
+    // Done powering up
     for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
         PORTD = row_idx | (1 << PD5);
         ASM_NOP;

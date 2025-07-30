@@ -28,6 +28,7 @@
 //
 /* DO NOT CHANGE */ #define NUM_ROWS 6
 /* DO NOT CHANGE */ #define MAX_KEYS_SUPPORTED_PER_ROW 16
+/* DO NOT CHANGE */ #define MAX_KEYS_SUPPORTED (NUM_ROWS * MAX_KEYS_SUPPORTED_PER_ROW)
 //////////////////////////////////////////////////////////
 
 
@@ -49,16 +50,11 @@
 #define MS(MILLISECONDS) (MILLISECONDS)
 
 extern const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS];
-extern const uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern volatile uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern volatile uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 
-extern const uint8_t COMMON_ACTUATION;
-
-#ifndef USE_COMMON_ACTUATION
-extern const uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
-#endif
-
-extern const uint8_t RAPID_TRIGGER_THRESHOLD;
-extern const uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD;
+extern volatile uint8_t RAPID_TRIGGER_THRESHOLD;
+extern volatile uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD;
 extern const uint8_t RAPID_TRIGGER_IDLE_HYSTERESIS;
 extern const uint8_t RAPID_TRIGGER_DIRECTION_HYSTERESIS;
 
