@@ -49,7 +49,7 @@ uint8_t PrevKeyboardHIDReportBuffer[1 + FETCH_CONFIG_REPORT_SIZE];
 /* START CUSTOMIZATION CODE */
 
 // Variables to detect keypresses
-extern uint8_t adc_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern uint8_t (*adc_values)[MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t key_status[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 static volatile uint8_t rpt_idx = 0;
@@ -161,25 +161,26 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
         uint8_t* buf    = (uint8_t*)ReportData;
         uint16_t offset = 0;
 
-        // 1) Copy keymap (6×16 = 96 bytes)
+        // Copy keymap
         eeprom_read_block(buf + offset,
                           (const void*)&default_settings.keymap[0][0],
                           sizeof default_settings.keymap);
         offset += sizeof default_settings.keymap;  // +96
 
-        // 2) Copy actuations (6×16 = 96 bytes)
+        // Copy actuations
         eeprom_read_block(buf + offset,
                           (const void*)&default_settings.actuations[0][0],
                           sizeof default_settings.actuations);
         offset += sizeof default_settings.actuations;  // +96 (now offset=192)
 
-        // 3) Copy thresholds (2 bytes)
+        // Copy thresholds
         buf[offset++] = eeprom_read_byte(&default_settings.rt_threshold);
         buf[offset++] = eeprom_read_byte(&default_settings.rt_sc_threshold);
 
         *ReportSize = offset;  // should be 194
         return true;
     }
+    
     // Process normal keyboard report
     USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
     memset(Rpt, 0, sizeof(*Rpt));

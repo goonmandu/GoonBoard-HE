@@ -34,7 +34,9 @@ int main(void) {
     GlobalInterruptEnable();
 
     while (1) {
+        SET_DEBUG_BIT;
         HID_Device_USBTask(&Keyboard_HID_Interface);
+        CLEAR_DEBUG_BIT;
         USB_USBTask();
     }
 }

@@ -15,8 +15,8 @@
 
 #define RAPID_TRIGGER_ENABLED (!(PINC & (1 << PC6)))
 
-extern uint8_t adc_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
-extern uint8_t old_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern uint8_t values_buf_0[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+extern uint8_t values_buf_1[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t adc_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t adc_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t key_actions[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
@@ -27,6 +27,9 @@ extern uint8_t key_being_released_for[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t candidate_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t candidate_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+
+extern uint8_t (*adc_values)[MAX_KEYS_SUPPORTED_PER_ROW];
+extern uint8_t (*old_values)[MAX_KEYS_SUPPORTED_PER_ROW];
 
 void setup_mux_pins(void);
 void setup_led_pins(void);

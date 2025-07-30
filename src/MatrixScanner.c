@@ -2,8 +2,8 @@
 #include "MatrixScanner.h"
 #include "KeyboardConfig.h"
 
-uint8_t adc_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
-uint8_t old_values[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t values_buf_0[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+uint8_t values_buf_1[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 uint8_t adc_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 uint8_t adc_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 uint8_t key_actions[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
@@ -14,6 +14,9 @@ uint8_t key_being_released_for[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 uint8_t candidate_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 uint8_t candidate_minima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
+
+uint8_t (*adc_values)[MAX_KEYS_SUPPORTED_PER_ROW] = values_buf_0;
+uint8_t (*old_values)[MAX_KEYS_SUPPORTED_PER_ROW] = values_buf_1;
 
 void setup_mux_pins(void) {
     DDRD |= 0x1F;  // Row select Mux: PD3-0
@@ -53,16 +56,20 @@ void scrlock_off(void) {
 
 void scan_keys() {
     static uint8_t current_adc_reading;
+
+    // Swap two buffers to avoid byte-by-byte copy
+    uint8_t (*tmp)[MAX_KEYS_SUPPORTED_PER_ROW] = adc_values;
+    adc_values = old_values;
+    old_values = tmp;
+
     for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
         PORTD = row_idx | (1 << PD5);
-        ASM_NOP;
         for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW[row_idx]; ++key_idx) {
             // Read HE values
             PORTF = key_idx << 4;
             
-            // Store old values for comparison
-            // also waits for multiplexer t_pd
-            old_values[row_idx][key_idx] = adc_values[row_idx][key_idx];
+            // Wait for Mux t_pd
+            ASM_NOP;
 
             // Read ADC
             spi_select_slave();
