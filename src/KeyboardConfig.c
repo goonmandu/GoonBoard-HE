@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "KeyboardConfig.h"
 #include "Keycodes.h"
 
@@ -28,6 +27,7 @@ const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
 const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
     4, 4, 3, 3, 3, 3  // Development Only
 };
+#endif
 
 // Allocate and zero-initialize the keymap and actuation matrices
 volatile uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = { { 0 } };
@@ -37,6 +37,11 @@ volatile uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = { { 0
 volatile uint8_t RAPID_TRIGGER_THRESHOLD = 0;
 volatile uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD = 0;
 
+// Define the rapid-trigger config consts
 const uint8_t RAPID_TRIGGER_IDLE_HYSTERESIS = MS(35);
 const uint8_t RAPID_TRIGGER_DIRECTION_HYSTERESIS = MS(3);
-#endif
+
+// Allocate the snap tap config bytes
+volatile uint8_t SNAPTAP_STATUS = SNAPTAP_DISABLED;
+volatile uint8_t SNAPTAP_KEY1_COORDS = SNAPTAP_KEYCOORDS(0, 0);
+volatile uint8_t SNAPTAP_KEY2_COORDS = SNAPTAP_KEYCOORDS(0, 0);

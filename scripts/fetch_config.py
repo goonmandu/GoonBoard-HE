@@ -24,6 +24,7 @@ def main():
 
     try:
         # Request FULL_CONFIG_SIZE+1 bytes (first byte is ReportID)
+        print("Reading EEPROM...")
         buf = dev.get_feature_report(REPORT_ID, FULL_CONFIG_SIZE + 1)
     except Exception as e:
         print(f"Error sending GetFeatureReport: {e}", file=sys.stderr)

@@ -1,5 +1,5 @@
 keycodes: dict[int, str] = {
-    0x00: '(none)',       0x01: 'rollover',   0x02: 'postfail',   0x03: 'undefind',
+    0x00: '(none)',     0x01: 'rollover',   0x02: 'postfail',   0x03: 'undefind',
     0x04: 'a',          0x05: 'b',          0x06: 'c',          0x07: 'd',
     0x08: 'e',          0x09: 'f',          0x0a: 'g',          0x0b: 'h',
     0x0c: 'i',          0x0d: 'j',          0x0e: 'k',          0x0f: 'l',

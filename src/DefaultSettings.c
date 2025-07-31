@@ -45,5 +45,9 @@ volatile keyboard_settings_t EEMEM default_settings = {
     },
 
     .rt_threshold = MM(0.3),
-    .rt_sc_threshold = MM(0.3)
+    .rt_sc_threshold = MM(0.3),
+
+    .snaptap_status = SNAPTAP_ENABLED,
+    .snaptap_key1 = SNAPTAP_KEYCOORDS(2, 0),
+    .snaptap_key2 = SNAPTAP_KEYCOORDS(2, 2),
 };

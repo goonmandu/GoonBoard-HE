@@ -9,11 +9,14 @@ void load_eeprom_to_sram(void) {
     // Load EEPROM actuations to SRAM
     eeprom_read_block((void*)ACTUATIONS_MATRIX, (const void*)&default_settings.actuations, MAX_KEYS_SUPPORTED);
 
-    // Load EEPROM RT threshold to SRAM
+    // Load EEPROM RT configs to SRAM
     RAPID_TRIGGER_THRESHOLD = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
-
-    // Load EEPROM RT SC threshold to SRAM
     RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
+
+    // Load EEPROM SnapTap configs to SRAM
+    SNAPTAP_STATUS = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_status);
+    SNAPTAP_KEY1_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_key1));
+    SNAPTAP_KEY2_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_key2));
 }
 
 
@@ -42,5 +45,23 @@ void save_rt_sc_threshold_to_eeprom(uint8_t rt_sc_threshold) {
     eeprom_update_byte(
         (uint8_t*)(&default_settings.rt_sc_threshold),
         rt_sc_threshold
+    );
+}
+
+void save_snaptap_status_to_eeprom(uint8_t snaptap_status) {
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.snaptap_status),
+        snaptap_status
+    );
+}
+
+void save_snaptap_keys_to_eeprom(uint8_t key1, uint8_t key2) {
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.snaptap_key1),
+        key1
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.snaptap_key2),
+        key2
     );
 }

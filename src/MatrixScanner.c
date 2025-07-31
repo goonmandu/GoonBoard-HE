@@ -1,4 +1,5 @@
 #include "Hacks.h"
+#include "SnapTap.h"
 #include "MatrixScanner.h"
 #include "KeyboardConfig.h"
 
@@ -55,28 +56,34 @@ void scrlock_off(void) {
 }
 
 void scan_keys() {
-    static uint8_t current_adc_reading;
+    SET_DEBUG_BIT;
+    static volatile uint8_t current_adc_reading;
 
     // Swap two buffers to avoid byte-by-byte copy
     uint8_t (*tmp)[MAX_KEYS_SUPPORTED_PER_ROW] = adc_values;
     adc_values = old_values;
     old_values = tmp;
 
-    for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-        PORTD = row_idx | (1 << PD5);
-        for (uint8_t key_idx = 0; key_idx < NUM_KEYS_PER_ROW[row_idx]; ++key_idx) {
-            // Read HE values
-            PORTF = key_idx << 4;
-            
-            // Wait for Mux t_pd
-            ASM_NOP;
+    uint8_t row_idx = 0;
+    uint8_t key_idx = 0;
+    PORTD = row_idx | (1 << PD5);
+    PORTF = key_idx << 4;
 
+    // 625 ns
+    // ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
+
+    while (row_idx < NUM_ROWS) {
+        while (key_idx < NUM_KEYS_PER_ROW[row_idx]) {
             // Read ADC
             spi_select_slave();
             current_adc_reading = (spi_read() << 1) | (spi_read() == 0x80);
             spi_deselect_slave();
-
             adc_values[row_idx][key_idx] = current_adc_reading;
+            
+            // By incrementing keys mux between ADC read and doing processing,
+            // we can offset Mux t_pd with procesing time.
+            PORTF = (key_idx + 1) << 4;
+            
             // Only execute rapid trigger part when enabled
             if (!RAPID_TRIGGER_ENABLED) {
                 if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= ACTUATIONS_MATRIX[row_idx][key_idx]) {
@@ -147,8 +154,17 @@ void scan_keys() {
                     }
                 }
             }
+            key_idx++;
         }
+        key_idx = 0;
+        row_idx++;
+        PORTD = row_idx | (1 << PD5);
+        PORTF = key_idx << 4;
+
+        // 625 ns
+        // ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
     }
+    CLEAR_DEBUG_BIT;
 }
 
 
@@ -166,16 +182,32 @@ void measure_adc_baseline() {
     // Power-up signal to being ready for data
     _delay_us(1);
 
-    // Done powering up
-    for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-        PORTD = row_idx | (1 << PD5);
-        ASM_NOP;
-        for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
-            PORTF = key_idx << 4;
-            ASM_NOP;
+    uint8_t row_idx = 0;
+    uint8_t key_idx = 0;
+    PORTD = row_idx | (1 << PD5);
+    PORTF = key_idx << 4;
+
+    // 625 ns for t_pd
+    ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
+
+    while (row_idx < NUM_ROWS) {
+        while (key_idx < NUM_KEYS_PER_ROW[row_idx]) {
+            // Read ADC
             spi_select_slave();
             ADC_BASELINE[row_idx][key_idx] = (spi_read() << 1) | (spi_read() == 0x80);
             spi_deselect_slave();
+            
+            // By incrementing keys mux between ADC read and doing processing,
+            // we can offset Mux t_pd with procesing time.
+            key_idx++;
+            PORTF = key_idx << 4;
+            
+            // Make GODDAMN sure t_pd has passed
+            ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
         }
+        key_idx = 0;
+        row_idx++;
+        PORTD = row_idx | (1 << PD5);
+        PORTF = key_idx << 4;
     }
 }

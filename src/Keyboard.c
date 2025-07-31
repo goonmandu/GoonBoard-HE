@@ -42,6 +42,7 @@
 #include "SettingsEditor.h"
 #include "DefaultSettings.h"
 #include "Hacks.h"
+#include "SnapTap.h"
 
 /** Buffer to hold the previously generated Keyboard HID report, for comparison purposes inside the HID class driver. */
 uint8_t PrevKeyboardHIDReportBuffer[1 + FETCH_CONFIG_REPORT_SIZE];
@@ -49,9 +50,7 @@ uint8_t PrevKeyboardHIDReportBuffer[1 + FETCH_CONFIG_REPORT_SIZE];
 /* START CUSTOMIZATION CODE */
 
 // Variables to detect keypresses
-extern uint8_t (*adc_values)[MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t key_status[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
-extern uint8_t ADC_BASELINE[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 static volatile uint8_t rpt_idx = 0;
 
 /* END CUSTOMIZATION CODE */
@@ -157,6 +156,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                                          void* ReportData,
                                          uint16_t* const ReportSize)
 {
+    // If fetch config request received, do that
     if (ReportType == HID_REPORT_ITEM_Feature && *ReportID == FETCH_CONFIG_REPORT_ID) {
         uint8_t* buf    = (uint8_t*)ReportData;
         uint16_t offset = 0;
@@ -174,20 +174,26 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
         offset += sizeof default_settings.actuations;  // +96 (now offset=192)
 
         // Copy thresholds
-        buf[offset++] = eeprom_read_byte(&default_settings.rt_threshold);
-        buf[offset++] = eeprom_read_byte(&default_settings.rt_sc_threshold);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
 
         *ReportSize = offset;  // should be 194
         return true;
     }
-    
-    // Process normal keyboard report
+
+    // Else, process normal keyboard report
     USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
     memset(Rpt, 0, sizeof(*Rpt));
     rpt_idx = 0;
 
     /* CORE KEY SCANNING LOGIC*/
     scan_keys();
+
+    // Filter SnapTap
+    static uint8_t* snaptap_restore_ptr;
+    static uint8_t snaptap_do_restore;
+    if (SNAPTAP_STATUS == SNAPTAP_ENABLED)
+        snaptap_do_restore = snaptap(&snaptap_restore_ptr);
 
     // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
     // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
@@ -196,6 +202,10 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
             if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
         }
     }
+
+    // Restore keys overridden to SnapTap for Rapid Trigger compatibility
+    if (SNAPTAP_STATUS == SNAPTAP_ENABLED && snaptap_do_restore)
+        *snaptap_restore_ptr = PRESSED;
 
     *ReportSize = sizeof(*Rpt);
     
