@@ -177,7 +177,15 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
         buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
         buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
 
-        *ReportSize = offset;  // should be 194
+        // Copy SnapTap settings
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_status);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key1);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key2);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_status);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key1);
+        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
+
+        *ReportSize = offset;  // should be 200
         return true;
     }
 
@@ -190,12 +198,15 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
     scan_keys();
 
     // Filter SnapTap
-    static uint8_t* snaptap_restore_ptr;
-    static uint8_t snaptap_do_restore;
+    static uint8_t* snaptap_a_restore_ptr;
+    static uint8_t snaptap_a_do_restore;
+    static uint8_t* snaptap_b_restore_ptr;
+    static uint8_t snaptap_b_do_restore;
+    if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED)
+        snaptap_a_do_restore = snaptap(SNAPTAP_MODULE_A, &snaptap_a_restore_ptr);
+    if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED)
+        snaptap_b_do_restore = snaptap(SNAPTAP_MODULE_B, &snaptap_b_restore_ptr);
 
-    if (SNAPTAP_STATUS == SNAPTAP_ENABLED) {
-        snaptap_do_restore = snaptap(&snaptap_restore_ptr);
-    }
 
     // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
     // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
@@ -205,9 +216,12 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
         }
     }
 
+
     // Restore keys overridden to SnapTap for Rapid Trigger compatibility
-    if (SNAPTAP_STATUS == SNAPTAP_ENABLED && snaptap_do_restore)
-        *snaptap_restore_ptr = PRESSED;
+    if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED && snaptap_a_do_restore)
+        *snaptap_a_restore_ptr = PRESSED;
+    if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED && snaptap_b_do_restore)
+        *snaptap_b_restore_ptr = PRESSED;
 
     *ReportSize = sizeof(*Rpt);
     
@@ -254,7 +268,7 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
         }
 
         // Keymap Edit Report, size = 4
-        //
+        // Params                   0           1           2
         // Byte         0           1           2           3
         // Meaning      ReportID    Row         Key         KeyCode
         case EDIT_KEYMAP_REPORT_ID: {
@@ -267,7 +281,7 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
         }
         
         // Actuation Point Edit Report, size = 4
-        //
+        // Params                   0           1           2
         // Byte         0           1           2           3
         // Meaning      ReportID    Row         Key         Actuation
         case EDIT_ACTUATIONS_REPORT_ID: {
@@ -279,9 +293,37 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
             break;
         }
 
-        // Unknown Report, skip
-        default: {
+        // SnapTap Module A Edit Report, size = 4
+        // Params                   0           1           2
+        // Byte         0           1           2           3
+        // Meaning      ReportID    ST Status   ST Key1     ST Key2
+        case EDIT_SNAPTAP_A_REPORT_ID: {
+            // Check for malformed actuation edit reports
+            if (ReportSize != EDIT_SNAPTAP_PARAMETERS_BYTES) break;
+            params = (uint8_t*)ReportData;
+            save_snaptap_a_to_eeprom(params[0], params[1], params[2]);
+            SNAPTAP_A_STATUS = params[0];
+            SNAPTAP_A_KEY1_COORDS = params[1];
+            SNAPTAP_A_KEY2_COORDS = params[2];
             break;
         }
+
+        // SnapTap Module A Edit Report, size = 4
+        // Params                   0           1           2
+        // Byte         0           1           2           3
+        // Meaning      ReportID    ST Status   ST Key1     ST Key2
+        case EDIT_SNAPTAP_B_REPORT_ID: {
+            // Check for malformed actuation edit reports
+            if (ReportSize != EDIT_SNAPTAP_PARAMETERS_BYTES) break;
+            params = (uint8_t*)ReportData;
+            save_snaptap_b_to_eeprom(params[0], params[1], params[2]);
+            SNAPTAP_B_STATUS = params[0];
+            SNAPTAP_B_KEY1_COORDS = params[1];
+            SNAPTAP_B_KEY2_COORDS = params[2];
+            break;
+        }
+
+        default:
+            break;
     }
 }

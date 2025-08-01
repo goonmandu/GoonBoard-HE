@@ -11,7 +11,8 @@ NUM_COLS = 16
 KEYMAP_SIZE = NUM_ROWS * NUM_COLS
 ACTUATION_SIZE = KEYMAP_SIZE
 THRESHOLD_SIZE = 2
-FULL_CONFIG_SIZE = KEYMAP_SIZE + ACTUATION_SIZE + THRESHOLD_SIZE
+SNAPTAP_SIZE = 6
+FULL_CONFIG_SIZE = KEYMAP_SIZE + ACTUATION_SIZE + THRESHOLD_SIZE + SNAPTAP_SIZE
 
 
 def main():
@@ -45,7 +46,8 @@ def main():
     # Split the payload
     keymap     = payload[0:KEYMAP_SIZE]
     actuations = payload[KEYMAP_SIZE:KEYMAP_SIZE+ACTUATION_SIZE]
-    thresholds = payload[-THRESHOLD_SIZE:]
+    thresholds = payload[KEYMAP_SIZE+ACTUATION_SIZE:KEYMAP_SIZE+ACTUATION_SIZE+THRESHOLD_SIZE]
+    snaptap    = payload[-SNAPTAP_SIZE:]
 
     # Print keymap matrix
     print("Keymap:")
@@ -63,6 +65,11 @@ def main():
     rt, rt_sc = thresholds
     print(f"RT threshold: {rt/10}mm")
     print(f"RT SC threshold: {rt_sc/10}mm")
+
+    # Print SnapTap settings
+    stas, sta1, sta2, stbs, stb1, stb2 = snaptap
+    print(f"SnapTap Module 1 {"ON, " if stas else "OFF,"} Keys 0x{sta1:02X}, 0x{sta2:02X}")
+    print(f"SnapTap Module 2 {"ON, " if stbs else "OFF,"} Keys 0x{stb1:02X}, 0x{stb2:02X}")
 
 
 if __name__ == "__main__":

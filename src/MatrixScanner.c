@@ -101,7 +101,7 @@ void scan_keys() {
             
             // Filter unconnected keys
             // ADC halfscale = 0x7F at B = 0
-            // Code assumes negative polarity switches
+            // Entire codebase assumes negative polarity switches
             if (spi_hi > 0x7F) {
                 // Mux t_pd
                 // ASM_NOP; ASM_NOP;

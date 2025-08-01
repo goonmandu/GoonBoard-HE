@@ -1,6 +1,7 @@
 #include <avr/eeprom.h>
 #include "SettingsEditor.h"
 #include "DefaultSettings.h"
+#include "SnapTap.h"
 
 void load_eeprom_to_sram(void) {
     // Load EEPROM keymap to SRAM
@@ -14,9 +15,12 @@ void load_eeprom_to_sram(void) {
     RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
 
     // Load EEPROM SnapTap configs to SRAM
-    SNAPTAP_STATUS = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_status);
-    SNAPTAP_KEY1_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_key1));
-    SNAPTAP_KEY2_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_key2));
+    SNAPTAP_A_STATUS = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_status);
+    SNAPTAP_A_KEY1_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_a_key1));
+    SNAPTAP_A_KEY2_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_a_key2));
+    SNAPTAP_B_STATUS = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_status);
+    SNAPTAP_B_KEY1_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_b_key1));
+    SNAPTAP_B_KEY2_COORDS = eeprom_read_byte((const uint8_t*)(&default_settings.snaptap_b_key2));
 }
 
 
@@ -48,20 +52,32 @@ void save_rt_sc_threshold_to_eeprom(uint8_t rt_sc_threshold) {
     );
 }
 
-void save_snaptap_status_to_eeprom(uint8_t snaptap_status) {
+void save_snaptap_a_to_eeprom(uint8_t snaptap_status, uint8_t key1, uint8_t key2) {
     eeprom_update_byte(
-        (uint8_t*)(&default_settings.snaptap_status),
+        (uint8_t*)(&default_settings.snaptap_a_status),
         snaptap_status
     );
-}
-
-void save_snaptap_keys_to_eeprom(uint8_t key1, uint8_t key2) {
     eeprom_update_byte(
-        (uint8_t*)(&default_settings.snaptap_key1),
+        (uint8_t*)(&default_settings.snaptap_a_key1),
         key1
     );
     eeprom_update_byte(
-        (uint8_t*)(&default_settings.snaptap_key2),
+        (uint8_t*)(&default_settings.snaptap_a_key2),
+        key2
+    );
+}
+
+void save_snaptap_b_to_eeprom(uint8_t snaptap_status, uint8_t key1, uint8_t key2) {
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.snaptap_b_status),
+        snaptap_status
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.snaptap_b_key1),
+        key1
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.snaptap_b_key2),
         key2
     );
 }

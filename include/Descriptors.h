@@ -100,9 +100,14 @@
         #define EDIT_ACTUATIONS_REPORT_ID           0x02
         #define EDIT_ACTUATIONS_PARAMETERS_BYTES    3
 
+        /** Runtime SnapTap Edit Request */
+        #define EDIT_SNAPTAP_A_REPORT_ID            0x04
+        #define EDIT_SNAPTAP_B_REPORT_ID            0x05
+        #define EDIT_SNAPTAP_PARAMETERS_BYTES       3
+
         /** Runtime Fetch Configuration Request */
         #define FETCH_CONFIG_REPORT_ID              0x03
-        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED + 2)
+        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED + 2 + 6)
 
     /* Function Prototypes: */
     /*

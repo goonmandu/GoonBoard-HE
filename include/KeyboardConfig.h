@@ -61,8 +61,11 @@ extern const uint8_t RAPID_TRIGGER_DIRECTION_HYSTERESIS;
 #define SNAPTAP_DISABLED 0
 #define SNAPTAP_ENABLED 1
 #define SNAPTAP_KEYCOORDS(ROW, KEY) ((uint8_t)((ROW << 4) | KEY))
-extern volatile uint8_t SNAPTAP_STATUS;         // Either 0 or 1
-extern volatile uint8_t SNAPTAP_KEY1_COORDS;    // Packed nibbles ROW#:KEY# (MSb - LSb)
-extern volatile uint8_t SNAPTAP_KEY2_COORDS;    // Packed nibbles ROW#:KEY# (MSb - LSb)
+extern volatile uint8_t SNAPTAP_A_STATUS;         // Either 0 or 1
+extern volatile uint8_t SNAPTAP_A_KEY1_COORDS;    // Packed nibbles ROW#:KEY# (MSb - LSb)
+extern volatile uint8_t SNAPTAP_A_KEY2_COORDS;    // Packed nibbles ROW#:KEY# (MSb - LSb)
+extern volatile uint8_t SNAPTAP_B_STATUS;         // Either 0 or 1
+extern volatile uint8_t SNAPTAP_B_KEY1_COORDS;    // Packed nibbles ROW#:KEY# (MSb - LSb)
+extern volatile uint8_t SNAPTAP_B_KEY2_COORDS;    // Packed nibbles ROW#:KEY# (MSb - LSb)
 
 #endif /* KEYBOARDCONFIG_H */
