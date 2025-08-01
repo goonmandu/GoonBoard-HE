@@ -57,7 +57,8 @@ void scrlock_off(void) {
 
 void scan_keys() {
     SET_DEBUG_BIT;
-    static volatile uint8_t current_adc_reading;
+    register uint8_t spi_hi asm("r18");
+    register uint8_t spi_lo asm("r19");
 
     // Swap two buffers to avoid byte-by-byte copy
     uint8_t (*tmp)[MAX_KEYS_SUPPORTED_PER_ROW] = adc_values;
@@ -69,20 +70,44 @@ void scan_keys() {
     PORTD = row_idx | (1 << PD5);
     PORTF = key_idx << 4;
 
-    // 625 ns
-    // ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
+    // Mux t_pd
+    // ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
 
     while (row_idx < NUM_ROWS) {
         while (key_idx < NUM_KEYS_PER_ROW[row_idx]) {
             // Read ADC
             spi_select_slave();
-            current_adc_reading = (spi_read() << 1) | (spi_read() == 0x80);
+            spi_hi = spi_read();
+            spi_lo = spi_read();
             spi_deselect_slave();
-            adc_values[row_idx][key_idx] = current_adc_reading;
-            
+            asm volatile(
+                "push   r16         \n\t"
+                "in     r16,    %2  \n\t"
+                "push   r16         \n\t"
+                "rol    %1          \n\t"
+                "rol    %0          \n\t"
+                "pop    r16         \n\t"
+                "out    %2,     r16 \n\t"
+                "pop    r16         \n\t"
+                : "+r"(spi_hi), "+r"(spi_lo)
+                : "I"(_SFR_IO_ADDR(SREG))
+                : "r16", "cc"
+            );
+
             // By incrementing keys mux between ADC read and doing processing,
-            // we can offset Mux t_pd with procesing time.
+            // we can offset Mux t_pd with processing time.
             PORTF = (key_idx + 1) << 4;
+            adc_values[row_idx][key_idx] = spi_hi;
+            
+            // Filter unconnected keys
+            // ADC halfscale = 0x7F at B = 0
+            // Code assumes negative polarity switches
+            if (spi_hi > 0x7F) {
+                // Mux t_pd
+                // ASM_NOP; ASM_NOP;
+                key_idx++;
+                continue;
+            }
             
             // Only execute rapid trigger part when enabled
             if (!RAPID_TRIGGER_ENABLED) {
@@ -92,6 +117,9 @@ void scan_keys() {
                 else {
                     key_status[row_idx][key_idx] = RELEASED;
                 }
+
+                // Mux t_pd
+                // ASM_NOP; ASM_NOP;
             }
             else {
                 // Rapid Trigger!
@@ -102,8 +130,8 @@ void scan_keys() {
                             && key_idle_for[row_idx][key_idx] >= RAPID_TRIGGER_IDLE_HYSTERESIS) {
                         key_idle_for[row_idx][key_idx] = 0;
                         key_actions[row_idx][key_idx] = IDLE;
-                        adc_maxima[row_idx][key_idx] = current_adc_reading;
-                        adc_minima[row_idx][key_idx] = current_adc_reading;
+                        adc_maxima[row_idx][key_idx] = spi_hi;
+                        adc_minima[row_idx][key_idx] = spi_hi;
                     }
                 }
 
@@ -125,7 +153,7 @@ void scan_keys() {
                     }
                     // If key was already being pressed, send press keystroke if
                     // delta(current, highest) >= threshold
-                    if (adc_maxima[row_idx][key_idx] - current_adc_reading >= RAPID_TRIGGER_THRESHOLD) {
+                    if (adc_maxima[row_idx][key_idx] - spi_hi >= RAPID_TRIGGER_THRESHOLD) {
                         key_status[row_idx][key_idx] = PRESSED;
                     }
                 }
@@ -148,21 +176,24 @@ void scan_keys() {
                     }
                     // If key was already being released, send release keystroke if
                     // delta(current, lowest) >= threshold
-                    if (current_adc_reading - adc_minima[row_idx][key_idx] >= RAPID_TRIGGER_THRESHOLD \
-                        || current_adc_reading >= ADC_BASELINE[row_idx][key_idx] - RAPID_TRIGGER_THRESHOLD) {
+                    if (spi_hi - adc_minima[row_idx][key_idx] >= RAPID_TRIGGER_THRESHOLD \
+                        || spi_hi >= ADC_BASELINE[row_idx][key_idx] - RAPID_TRIGGER_THRESHOLD) {
                         key_status[row_idx][key_idx] = RELEASED;
                     }
                 }
+                
+                // Mux t_pd
+                // ASM_NOP; ASM_NOP;
             }
             key_idx++;
         }
         key_idx = 0;
         row_idx++;
-        PORTD = row_idx | (1 << PD5);
         PORTF = key_idx << 4;
+        PORTD = row_idx | (1 << PD5);
 
-        // 625 ns
-        // ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
+        // Mux t_pd
+        // ASM_NOP; ASM_NOP;
     }
     CLEAR_DEBUG_BIT;
 }
@@ -191,7 +222,7 @@ void measure_adc_baseline() {
     ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
 
     while (row_idx < NUM_ROWS) {
-        while (key_idx < NUM_KEYS_PER_ROW[row_idx]) {
+        while (key_idx < MAX_KEYS_SUPPORTED_PER_ROW) {
             // Read ADC
             spi_select_slave();
             ADC_BASELINE[row_idx][key_idx] = (spi_read() << 1) | (spi_read() == 0x80);

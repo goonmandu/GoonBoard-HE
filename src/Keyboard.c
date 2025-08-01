@@ -192,8 +192,10 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
     // Filter SnapTap
     static uint8_t* snaptap_restore_ptr;
     static uint8_t snaptap_do_restore;
-    if (SNAPTAP_STATUS == SNAPTAP_ENABLED)
+
+    if (SNAPTAP_STATUS == SNAPTAP_ENABLED) {
         snaptap_do_restore = snaptap(&snaptap_restore_ptr);
+    }
 
     // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
     // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
