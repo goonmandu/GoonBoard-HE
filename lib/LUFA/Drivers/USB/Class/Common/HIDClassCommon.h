@@ -65,6 +65,8 @@
 		#endif
 
 	/* Macros: */
+		#define INTERNAL_GENERATE_PERIODIC_HID_REPORT_ID 0x00
+        #define HID_KEYBOARD_REPORT_ID 0x01
 		/** \name Keyboard Standard Report Modifier Masks */
 		/**@{*/
 		/** Constant for a keyboard report modifier byte, indicating that the keyboard's left control key is currently pressed. */
@@ -425,6 +427,7 @@
 			HID_RI_USAGE_PAGE(8, 0x01),                     \
 			HID_RI_USAGE(8, 0x06),                          \
 			HID_RI_COLLECTION(8, 0x01),                     \
+				HID_RI_REPORT_ID(8, HID_KEYBOARD_REPORT_ID),\
 				HID_RI_USAGE_PAGE(8, 0x07),                 \
 				HID_RI_USAGE_MINIMUM(8, 0xE0),              \
 				HID_RI_USAGE_MAXIMUM(8, 0xE7),              \

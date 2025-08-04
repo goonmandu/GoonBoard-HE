@@ -38,8 +38,8 @@
 
     /* Includes: */
         #include <avr/pgmspace.h>
-        #include "KeyboardConfig.h"
         #include "../lib/LUFA/Drivers/USB/USB.h"
+        #include "KeyboardConfig.h"
 
     /* Type Defines: */
         /** Type define for the device configuration descriptor structure. This must be defined in the
@@ -80,34 +80,31 @@
         /** Endpoint address of the Keyboard HID reporting IN endpoint. */
         #define KEYBOARD_EPADDR              (ENDPOINT_DIR_IN | 1)
 
-        /** Size in bytes of the Keyboard HID reporting IN endpoint. */
-        #define KEYBOARD_EPSIZE              (MAX_NKRO + 2)
+/** Size in bytes of the Keyboard HID reporting IN endpoint. */
+/** 1 (ReportID) + 2 (Modifiers + Reserved) + 32KRO */
+/** [first byte required due to multiple ReportIDs and not just one IN report] */
+#define KEYBOARD_EPSIZE              (1 + 2 + MAX_NKRO)
 
     /* Report ID Codes */
-        /** Keyboard Lock LEDs Request */
-        #define LOCK_LEDS_REPORT_ID                 0x00
+        /** Keyboard Lock LEDs Request is the same as Keyboard HID ReportID */
+        #define LOCK_LEDS_REPORT_ID                 HID_KEYBOARD_REPORT_ID
 
-        /** LUFA handles non-Keyboard Lock LED reports differently;
-         *  it subtracts 1 from ReportSize for other SetReports.
-         *  Like, I love your library and thank you for making my
-         *  entire keyboard project possible. But why?
-         */
         /** Runtime Keymap Edit Request */
-        #define EDIT_KEYMAP_REPORT_ID               0x01
-        #define EDIT_KEYMAP_PARAMETERS_BYTES        3
+        #define EDIT_KEYMAP_REPORT_ID               0xA0
+        #define EDIT_KEYMAP_PARAMETERS_BYTES        4
 
         /** Runtime Actuation Edit Request */
-        #define EDIT_ACTUATIONS_REPORT_ID           0x02
-        #define EDIT_ACTUATIONS_PARAMETERS_BYTES    3
+        #define EDIT_ACTUATIONS_REPORT_ID           0xA1
+        #define EDIT_ACTUATIONS_PARAMETERS_BYTES    4
 
         /** Runtime SnapTap Edit Request */
-        #define EDIT_SNAPTAP_A_REPORT_ID            0x04
-        #define EDIT_SNAPTAP_B_REPORT_ID            0x05
-        #define EDIT_SNAPTAP_PARAMETERS_BYTES       3
+        #define EDIT_SNAPTAP_A_REPORT_ID            0xB0
+        #define EDIT_SNAPTAP_B_REPORT_ID            0xB1
+        #define EDIT_SNAPTAP_PARAMETERS_BYTES       4
 
         /** Runtime Fetch Configuration Request */
-        #define FETCH_CONFIG_REPORT_ID              0x03
-        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED + 2 + 6)
+        #define FETCH_CONFIG_REPORT_ID              0xC0
+        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED_PER_ROW + 2 + 6)
 
     /* Function Prototypes: */
     /*

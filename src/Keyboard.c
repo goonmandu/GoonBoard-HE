@@ -45,7 +45,7 @@
 #include "SnapTap.h"
 
 /** Buffer to hold the previously generated Keyboard HID report, for comparison purposes inside the HID class driver. */
-uint8_t PrevKeyboardHIDReportBuffer[1 + FETCH_CONFIG_REPORT_SIZE];
+uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 
 /* START CUSTOMIZATION CODE */
 
@@ -60,20 +60,20 @@ static volatile uint8_t rpt_idx = 0;
  *  within a device can be differentiated from one another.
  */
 USB_ClassInfo_HID_Device_t Keyboard_HID_Interface =
-    {
-        .Config =
-            {
-                .InterfaceNumber              = INTERFACE_ID_Keyboard,
-                .ReportINEndpoint             =
-                    {
-                        .Address              = KEYBOARD_EPADDR,
-                        .Size                 = KEYBOARD_EPSIZE,
-                        .Banks                = 1,
-                    },
-                .PrevReportINBuffer           = PrevKeyboardHIDReportBuffer,
-                .PrevReportINBufferSize       = sizeof(PrevKeyboardHIDReportBuffer),
-            },
-    };
+{
+    .Config =
+        {
+            .InterfaceNumber              = INTERFACE_ID_Keyboard,
+            .ReportINEndpoint             =
+                {
+                    .Address              = KEYBOARD_EPADDR,
+                    .Size                 = KEYBOARD_EPSIZE,
+                    .Banks                = 1,
+                },
+            .PrevReportINBuffer           = PrevKeyboardHIDReportBuffer,
+            .PrevReportINBufferSize       = sizeof(PrevKeyboardHIDReportBuffer),
+        },
+};
 
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
 void SetupHardware()
@@ -150,82 +150,114 @@ void EVENT_USB_Device_StartOfFrame(void)
  *
  *  \return Boolean \c true to force the sending of the report, \c false to let the library determine if it needs to be sent
  */
+// This function is called in TWO places:
+//     `HID_Device_ProcessControlRequest` (which handles host USB requests)
+//     `HID_Device_USBTask` (which handles the keyboard's own HID generation)
+//
+// When called by the Host USB Request handler function, `*ReportID` is nonzero
+// and this function should detect the ReportID then generate a suitable report
+// for that ReportID.
+//
+// When called by the periodic HID generation function, `*ReportID` is zero and
+// this function should modify `*ReportID` to the ReportID of the HID keyboard
+// report (in this codebase, `HID_KEYBOARD_REPORT_ID`), then send the HID report.
 bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo,
                                          uint8_t* const ReportID,
                                          const uint8_t ReportType,
                                          void* ReportData,
                                          uint16_t* const ReportSize)
 {
-    // If fetch config request received, do that
-    if (ReportType == HID_REPORT_ITEM_Feature && *ReportID == FETCH_CONFIG_REPORT_ID) {
-        uint8_t* buf    = (uint8_t*)ReportData;
-        uint16_t offset = 0;
+    switch (*ReportID) {
+        // This case is only taken with the periodic keyboard status polls
+        // Process normal keyboard report
+        case INTERNAL_GENERATE_PERIODIC_HID_REPORT_ID: {
+            if (ReportType == HID_REPORT_ITEM_In) {
+                // SET_LEFT_LED;
+                // Set outbound ReportID to the one specified in the descriptor
+                *ReportID = HID_KEYBOARD_REPORT_ID;
 
-        // Copy keymap
-        eeprom_read_block(buf + offset,
-                          (const void*)&default_settings.keymap[0][0],
-                          sizeof default_settings.keymap);
-        offset += sizeof default_settings.keymap;  // +96
+                USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
+                rpt_idx = 0;
 
-        // Copy actuations
-        eeprom_read_block(buf + offset,
-                          (const void*)&default_settings.actuations[0][0],
-                          sizeof default_settings.actuations);
-        offset += sizeof default_settings.actuations;  // +96 (now offset=192)
+                // Scans keys and fills `key_status` based on whether RT is enabled
+                scan_keys();
 
-        // Copy thresholds
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
+                // Filter SnapTap
+                static uint8_t* snaptap_a_restore_ptr;
+                static uint8_t snaptap_a_do_restore;
+                static uint8_t* snaptap_b_restore_ptr;
+                static uint8_t snaptap_b_do_restore;
+                if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED)
+                    snaptap_a_do_restore = snaptap(SNAPTAP_MODULE_A, &snaptap_a_restore_ptr);
+                if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED)
+                    snaptap_b_do_restore = snaptap(SNAPTAP_MODULE_B, &snaptap_b_restore_ptr);
 
-        // Copy SnapTap settings
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_status);
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key1);
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key2);
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_status);
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key1);
-        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
+                // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
+                // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
+                for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
+                    for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW && rpt_idx < MAX_NKRO; ++key_idx) {
+                        if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
+                    }
+                }
 
-        *ReportSize = offset;  // should be 200
-        return true;
-    }
+                // Restore keys overridden to SnapTap for Rapid Trigger compatibility
+                if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED && snaptap_a_do_restore)
+                    *snaptap_a_restore_ptr = PRESSED;
+                if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED && snaptap_b_do_restore)
+                    *snaptap_b_restore_ptr = PRESSED;
 
-    // Else, process normal keyboard report
-    USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
-    memset(Rpt, 0, sizeof(*Rpt));
-    rpt_idx = 0;
-
-    /* CORE KEY SCANNING LOGIC*/
-    scan_keys();
-
-    // Filter SnapTap
-    static uint8_t* snaptap_a_restore_ptr;
-    static uint8_t snaptap_a_do_restore;
-    static uint8_t* snaptap_b_restore_ptr;
-    static uint8_t snaptap_b_do_restore;
-    if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED)
-        snaptap_a_do_restore = snaptap(SNAPTAP_MODULE_A, &snaptap_a_restore_ptr);
-    if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED)
-        snaptap_b_do_restore = snaptap(SNAPTAP_MODULE_B, &snaptap_b_restore_ptr);
-
-
-    // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
-    // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
-    for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-        for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW && rpt_idx < MAX_NKRO; ++key_idx) {
-            if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
+                *ReportSize = sizeof(*Rpt);
+                // CLEAR_LEFT_LED;
+                return false;
+            }
+            return false;
         }
+
+        /**
+         * Below this line contains everything that is NOT the periodically generated keyboard
+         * report and are coming from the host requesting information or interacting with
+         * the device.
+         */
+        case FETCH_CONFIG_REPORT_ID: {
+            if (ReportType == HID_REPORT_ITEM_Feature) {
+                // SET_RIGHT_LED;
+                uint8_t* buf    = (uint8_t*)ReportData;
+                uint16_t offset = 0;
+
+                // Copy keymap
+                eeprom_read_block(buf + offset,
+                                (const void*)&default_settings.keymap[0][0],
+                                sizeof default_settings.keymap);
+                offset += sizeof default_settings.keymap;  // +96
+
+                // Copy actuations
+                eeprom_read_block(buf + offset,
+                                (const void*)&default_settings.actuations[0][0],
+                                sizeof default_settings.actuations);
+                offset += sizeof default_settings.actuations;  // +96 (now offset=192)
+
+                // Copy thresholds
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
+
+                // Copy SnapTap settings
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_status);
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key1);
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key2);
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_status);
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key1);
+                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
+
+                *ReportSize = offset;  // should be 200
+                // CLEAR_RIGHT_LED;
+                return true;
+            }
+            return false;
+        }
+
+        default:
+            return false;
     }
-
-
-    // Restore keys overridden to SnapTap for Rapid Trigger compatibility
-    if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED && snaptap_a_do_restore)
-        *snaptap_a_restore_ptr = PRESSED;
-    if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED && snaptap_b_do_restore)
-        *snaptap_b_restore_ptr = PRESSED;
-
-    *ReportSize = sizeof(*Rpt);
-    
-    return false;
 }
 
 

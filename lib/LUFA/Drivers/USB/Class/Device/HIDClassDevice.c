@@ -90,7 +90,7 @@ void HID_Device_ProcessControlRequest(USB_ClassInfo_HID_Device_t* const HIDInter
 				Endpoint_ClearIN();
 
 				CALLBACK_HID_Device_ProcessHIDReport(HIDInterfaceInfo, ReportID, ReportType,
-				                                     &ReportData[ReportID ? 1 : 0], ReportSize - (ReportID ? 1 : 0));
+				                                     &ReportData[ReportID ? 1 : 0], ReportSize);
 			}
 
 			break;

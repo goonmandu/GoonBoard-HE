@@ -47,15 +47,20 @@
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
     // Report Protocol Keyboard HID
     HID_DESCRIPTOR_KEYBOARD(32),
-    
-    // Fetch Configurations
-    0x85, FETCH_CONFIG_REPORT_ID,       // Report ID
-    0x09, 0x01,                         // Usage (Vendor‑defined)
-    0x15, 0x00,                         // Logical Min 0
-    0x26, 0xFF, 0x00,                   // Logical Max 255
-    0x75, 0x08,                         // Report Size = 8 bits
-    0x95, FETCH_CONFIG_REPORT_SIZE,     // Report Count = 194 fields
-    0xB1, 0x02                          // Feature (Data,Var,Abs)
+
+    // Start a new top-level collection to be compliant with HID Standard
+    // and make Windows stop crying about Code 10
+    HID_RI_USAGE_PAGE(8, 0xFF),               // Vendor-defined
+    HID_RI_USAGE(8, 0x01),
+    HID_RI_COLLECTION(8, 0x01),               // Application collection
+        HID_RI_REPORT_ID(8, FETCH_CONFIG_REPORT_ID),
+        HID_RI_USAGE(8, 0x01),
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),
+        HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
+        HID_RI_REPORT_SIZE(8, 0x08),
+        HID_RI_REPORT_COUNT(8, FETCH_CONFIG_REPORT_SIZE),
+        HID_RI_FEATURE(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+    HID_RI_END_COLLECTION(0)
 };
 
 /** Device descriptor structure. This descriptor, located in FLASH memory, describes the overall
@@ -102,7 +107,7 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
             .ConfigurationNumber    = 1,
             .ConfigurationStrIndex  = NO_DESCRIPTOR,
 
-            .ConfigAttributes       = (USB_CONFIG_ATTR_RESERVED | USB_CONFIG_ATTR_SELFPOWERED),
+            .ConfigAttributes       = (USB_CONFIG_ATTR_RESERVED),
 
             .MaxPowerConsumption    = USB_CONFIG_POWER_MA(500)
         },

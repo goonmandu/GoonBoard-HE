@@ -56,7 +56,6 @@ void scrlock_off(void) {
 }
 
 void scan_keys() {
-    SET_DEBUG_BIT;
     register uint8_t spi_hi asm("r18");
     register uint8_t spi_lo asm("r19");
 
@@ -69,9 +68,6 @@ void scan_keys() {
     uint8_t key_idx = 0;
     PORTD = row_idx | (1 << PD5);
     PORTF = key_idx << 4;
-
-    // Mux t_pd
-    // ASM_NOP; ASM_NOP; ASM_NOP; ASM_NOP;
 
     while (row_idx < NUM_ROWS) {
         while (key_idx < NUM_KEYS_PER_ROW[row_idx]) {
@@ -191,11 +187,7 @@ void scan_keys() {
         row_idx++;
         PORTF = key_idx << 4;
         PORTD = row_idx | (1 << PD5);
-
-        // Mux t_pd
-        // ASM_NOP; ASM_NOP;
     }
-    CLEAR_DEBUG_BIT;
 }
 
 

@@ -5,7 +5,7 @@
 #include "Hacks.h"
 #include "SettingsEditor.h"
 
-extern uint8_t PrevKeyboardHIDReportBuffer[sizeof(USB_KeyboardReport_Data_t)];
+extern uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 extern USB_ClassInfo_HID_Device_t Keyboard_HID_Interface;
 
 int main(void) {
@@ -34,7 +34,13 @@ int main(void) {
     GlobalInterruptEnable();
 
     while (1) {
+        // This is the keyboard generating its OWN report
+        // every 1 ms (because the firmware is 1000 Hz).
         HID_Device_USBTask(&Keyboard_HID_Interface);
+
+        // This is polled continuously (because HID_Device_USBTask
+        // exits early if there is no data to send) to serviceUSB requests
+        // USB requests from the host.
         USB_USBTask();
     }
 }

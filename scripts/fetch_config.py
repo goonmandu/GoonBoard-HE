@@ -5,7 +5,7 @@ from keycodes import keycodes
 # Constants matching the device configuration
 VID = 0x2B00       # your keyboard’s Vendor ID
 PID = 0xB1E5       # your keyboard’s Product ID
-REPORT_ID = 3      # Full config Feature report ID
+REPORT_ID = 0xC0      # Full config Feature report ID
 NUM_ROWS = 6
 NUM_COLS = 16
 KEYMAP_SIZE = NUM_ROWS * NUM_COLS
@@ -36,11 +36,13 @@ def main():
 
     if not buf or buf[0] != REPORT_ID:
         print(f"Unexpected report ID: {buf[0] if buf else None}", file=sys.stderr)
+        print(f"Got: {buf}")
         sys.exit(1)
 
     payload = buf[1:]
     if len(payload) < FULL_CONFIG_SIZE:
         print(f"Incomplete payload: got {len(payload)} bytes, expected {FULL_CONFIG_SIZE}", file=sys.stderr)
+        print(f"Got: {buf}")
         sys.exit(1)
 
     # Split the payload
@@ -50,21 +52,28 @@ def main():
     snaptap    = payload[-SNAPTAP_SIZE:]
 
     # Print keymap matrix
-    print("Keymap:")
+    print("Keymap:  ", end="")
+    for k in range(NUM_COLS):
+        print(f"{k:02X}".ljust(10), end="\n" if k == NUM_COLS - 1 else "")
     for r in range(NUM_ROWS):
         row = keymap[r*NUM_COLS:(r+1)*NUM_COLS]
         print(f" Row {r}: ", '  '.join(f"{keycodes[b].upper().ljust(8)}" for b in row))
+    print()
 
     # Print actuation matrix
-    print("Actuations:")
+    print("Actuat:  ", end="")
+    for k in range(NUM_COLS):
+        print(f"{k:02X}".ljust(10), end="\n" if k == NUM_COLS - 1 else "")
     for r in range(NUM_ROWS):
         row = actuations[r*NUM_COLS:(r+1)*NUM_COLS]
         print(f" Row {r}: ", '  '.join(f"{b/10}mm".ljust(8) for b in row))
+    print()
 
     # Print thresholds
     rt, rt_sc = thresholds
     print(f"RT threshold: {rt/10}mm")
     print(f"RT SC threshold: {rt_sc/10}mm")
+    print()
 
     # Print SnapTap settings
     stas, sta1, sta2, stbs, stb1, stb2 = snaptap

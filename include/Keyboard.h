@@ -66,6 +66,8 @@ extern "C" {
         /** LED mask for the library LED driver, to indicate that an error has occurred in the USB interface. */
         #define LEDMASK_USB_ERROR        (LEDS_LED1 | LEDS_LED3)
 
+        #define PREV_REPORT_BUFFER_SIZE     (255)
+
     /* Function Prototypes: */
         void SetupHardware(void);
 
