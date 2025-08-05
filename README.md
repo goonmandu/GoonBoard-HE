@@ -2,6 +2,8 @@
 ## Overview
 This repository contains the firmware source code for building a USB HID keyboard with the Pro Micro development board using hall-effect switches.
 
+The web configurator companion is [GoonBoard-Configurator](https://github.com/goonmandu/GoonBoard-Configurator).
+
 ## Parts used
 | Type            | Manufacturer         | Part Number       | Unit Price (USD) |
 |-----------------|----------------------|-------------------|------------------|
@@ -23,11 +25,11 @@ Since I have used the PlatformIO toolchain for the entirety of the development p
 7. Wait a few seconds and your microcontroller will be recognized as `GoonMandu GoonBoard` with VID:PID `2B00:B1E5`.
 
 ## Performance
-Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz.
+Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz, both SnapTap modules enabled.
 
 | Metric | RT On | RT Off |
 |-|-|-|
-| USB HID Report Generation | ? | ? |
+| Time to finish one USB HID frame | 810 us | 772 us |
 
 ## Pin Assignments
 | AVR | Pro Micro | Function | Notes |

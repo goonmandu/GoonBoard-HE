@@ -34,9 +34,11 @@ int main(void) {
     GlobalInterruptEnable();
 
     while (1) {
+        SET_DEBUG_BIT;
         // This is the keyboard generating its OWN report
         // every 1 ms (because the firmware is 1000 Hz).
         HID_Device_USBTask(&Keyboard_HID_Interface);
+        CLEAR_DEBUG_BIT;
 
         // This is polled continuously (because HID_Device_USBTask
         // exits early if there is no data to send) to serviceUSB requests
