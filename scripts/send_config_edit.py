@@ -14,7 +14,7 @@ def main():
     # Update this path if your hidraw device is different
     device = "/dev/hidraw5"
     # Four-byte report including NULs
-    report = bytes([0xA0, 0x00, 0x0A, 0x00])
+    report = bytes([0xB1, 0x00, 0x00, 0x00])
     write_hid_report(device, report)
 
 if __name__ == "__main__":

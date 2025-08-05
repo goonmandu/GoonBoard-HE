@@ -104,7 +104,7 @@
 
         /** Runtime Fetch Configuration Request */
         #define FETCH_CONFIG_REPORT_ID              0xC0
-        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED_PER_ROW + 2 + 6)
+        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED + 2 + 6)
 
     /* Function Prototypes: */
     /*

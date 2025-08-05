@@ -50,11 +50,11 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
 
     // Start a new top-level collection to be compliant with HID Standard
     // and make Windows stop crying about Code 10
-    HID_RI_USAGE_PAGE(8, 0xFF),               // Vendor-defined
-    HID_RI_USAGE(8, 0x01),
+    HID_RI_USAGE_PAGE(16, 0xFFA0),               // Vendor-defined
+    HID_RI_USAGE(8, 0xA1),
     HID_RI_COLLECTION(8, 0x01),               // Application collection
         HID_RI_REPORT_ID(8, FETCH_CONFIG_REPORT_ID),
-        HID_RI_USAGE(8, 0x01),
+        HID_RI_USAGE(8, 0xA2),
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
         HID_RI_REPORT_SIZE(8, 0x08),
