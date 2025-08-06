@@ -47,6 +47,9 @@
 /** Buffer to hold the previously generated Keyboard HID report, for comparison purposes inside the HID class driver. */
 uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 
+/** Buffer to hold the previously generated RawHID report */
+uint8_t PrevRawHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
+
 /* START CUSTOMIZATION CODE */
 
 // Variables to detect keypresses
@@ -60,20 +63,36 @@ static volatile uint8_t rpt_idx = 0;
  *  within a device can be differentiated from one another.
  */
 USB_ClassInfo_HID_Device_t Keyboard_HID_Interface =
-{
-    .Config =
-        {
-            .InterfaceNumber              = INTERFACE_ID_Keyboard,
-            .ReportINEndpoint             =
-                {
-                    .Address              = KEYBOARD_EPADDR,
-                    .Size                 = KEYBOARD_EPSIZE,
-                    .Banks                = 1,
-                },
-            .PrevReportINBuffer           = PrevKeyboardHIDReportBuffer,
-            .PrevReportINBufferSize       = sizeof(PrevKeyboardHIDReportBuffer),
-        },
-};
+    {
+        .Config =
+            {
+                .InterfaceNumber                = INTERFACE_ID_Keyboard,
+                .ReportINEndpoint               =
+                    {
+                        .Address                = KEYBOARD_EPADDR,
+                        .Size                   = KEYBOARD_EPSIZE,
+                        .Banks                  = 1,
+                    },
+                .PrevReportINBuffer             = PrevKeyboardHIDReportBuffer,
+                .PrevReportINBufferSize         = sizeof(PrevKeyboardHIDReportBuffer),
+            },
+    };
+
+USB_ClassInfo_HID_Device_t RawHID_HID_Interface = 
+    {
+        .Config =
+            {
+                .InterfaceNumber                = INTERFACE_ID_RawHID,
+                .ReportINEndpoint               =
+                    {
+                        .Address                = RAWHID_IN_EPADDR,
+                        .Size                   = RAWHID_IN_EPSIZE,
+                        .Banks                  = 1,
+                    },
+                .PrevReportINBuffer             = PrevRawHIDReportBuffer,
+                .PrevReportINBufferSize         = sizeof(PrevRawHIDReportBuffer),
+            },
+    };
 
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
 void SetupHardware()
@@ -122,6 +141,7 @@ void EVENT_USB_Device_ConfigurationChanged(void)
     bool ConfigSuccess = true;
 
     ConfigSuccess &= HID_Device_ConfigureEndpoints(&Keyboard_HID_Interface);
+    ConfigSuccess &= HID_Device_ConfigureEndpoints(&RawHID_HID_Interface);
 
     USB_Device_EnableSOFEvents();
 
@@ -132,12 +152,14 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 void EVENT_USB_Device_ControlRequest(void)
 {
     HID_Device_ProcessControlRequest(&Keyboard_HID_Interface);
+    HID_Device_ProcessControlRequest(&RawHID_HID_Interface);
 }
 
 /** Event handler for the USB device Start Of Frame event. */
 void EVENT_USB_Device_StartOfFrame(void)
 {
     HID_Device_MillisecondElapsed(&Keyboard_HID_Interface);
+    HID_Device_MillisecondElapsed(&RawHID_HID_Interface);
 }
 
 /** HID class driver callback function for the creation of HID reports to the host.
@@ -219,6 +241,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
          * the device.
          */
         case FETCH_CONFIG_REPORT_ID: {
+            if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_Keyboard) SET_RIGHT_LED;
             if (ReportType == HID_REPORT_ITEM_Feature) {
                 // SET_RIGHT_LED;
                 uint8_t* buf    = (uint8_t*)ReportData;

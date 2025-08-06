@@ -46,7 +46,7 @@ Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz, both SnapTap modul
 | PB6 | 10 | SPI /SS |
 | PB3 | 14 | SPI MISO |
 | PB1 | 15 | SPI SCLK |
-| *PE6* | *7* | *Debug* | Omitted in release binaries.<br>Only used if `LOGIC_ANALYZER_DEBUG` is defined. |
+| *PE6* | *7* | *Debug* | Omitted in release binaries.<br>Only used if `DEBUG_BITS` is defined. |
 
 ## Versioning
 Format:

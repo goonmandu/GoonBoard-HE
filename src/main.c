@@ -7,6 +7,7 @@
 
 extern uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 extern USB_ClassInfo_HID_Device_t Keyboard_HID_Interface;
+extern USB_ClassInfo_HID_Device_t RawHID_HID_Interface;
 
 int main(void) {
     SetupHardware();
@@ -38,6 +39,7 @@ int main(void) {
         // This is the keyboard generating its OWN report
         // every 1 ms (because the firmware is 1000 Hz).
         HID_Device_USBTask(&Keyboard_HID_Interface);
+        HID_Device_USBTask(&RawHID_HID_Interface);
         CLEAR_DEBUG_BIT;
 
         // This is polled continuously (because HID_Device_USBTask

@@ -51,9 +51,14 @@
             USB_Descriptor_Configuration_Header_t Config;
 
             // Keyboard HID Interface
-            USB_Descriptor_Interface_t            HID_Interface;
-            USB_HID_Descriptor_HID_t              HID_KeyboardHID;
-            USB_Descriptor_Endpoint_t             HID_ReportINEndpoint;
+            USB_Descriptor_Interface_t              HID_Interface;
+            USB_HID_Descriptor_HID_t                HID_KeyboardHID;
+            USB_Descriptor_Endpoint_t               HID_ReportINEndpoint;
+            
+            // RawHID Interface
+            USB_Descriptor_Interface_t              RawHID_Interface;
+            USB_HID_Descriptor_HID_t                RawHID_RawHID;
+            USB_Descriptor_Endpoint_t               RawHID_ReportINEndpoint;
         } USB_Descriptor_Configuration_t;
 
         /** Enum for the device interface descriptor IDs within the device. Each interface descriptor
@@ -63,6 +68,7 @@
         enum InterfaceDescriptors_t
         {
             INTERFACE_ID_Keyboard = 0, /**< Keyboard interface descriptor ID */
+            INTERFACE_ID_RawHID   = 1, /**< RawHID interface descriptor ID */
         };
 
         /** Enum for the device string descriptor IDs within the device. Each string descriptor should
@@ -78,12 +84,18 @@
 
     /* Macros: */
         /** Endpoint address of the Keyboard HID reporting IN endpoint. */
-        #define KEYBOARD_EPADDR              (ENDPOINT_DIR_IN | 1)
+        #define KEYBOARD_EPADDR                 (ENDPOINT_DIR_IN | 1)
+
+        /** Endpoint addresses of the RawHID interface */
+        #define RAWHID_IN_EPADDR                (ENDPOINT_DIR_IN | 2)
+        #define RAWHID_OUT_EPADDR               (ENDPOINT_DIR_OUT | 3)
 
 /** Size in bytes of the Keyboard HID reporting IN endpoint. */
 /** 1 (ReportID) + 2 (Modifiers + Reserved) + 32KRO */
 /** [first byte required due to multiple ReportIDs and not just one IN report] */
-#define KEYBOARD_EPSIZE              (1 + 2 + MAX_NKRO)
+#define KEYBOARD_EPSIZE                 (1 + 2 + MAX_NKRO)
+#define RAWHID_IN_EPSIZE                (1 + FETCH_CONFIG_REPORT_SIZE)
+#define RAWHID_OUT_EPSIZE               (16)  // Reasonable amount
 
     /* Report ID Codes */
         /** Keyboard Lock LEDs Request is the same as Keyboard HID ReportID */
