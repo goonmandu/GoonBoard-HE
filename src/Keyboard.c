@@ -48,7 +48,7 @@
 uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 
 /** Buffer to hold the previously generated RawHID report */
-uint8_t PrevRawHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
+// uint8_t PrevRawHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 
 /* START CUSTOMIZATION CODE */
 
@@ -89,8 +89,8 @@ USB_ClassInfo_HID_Device_t RawHID_HID_Interface =
                         .Size                   = RAWHID_IN_EPSIZE,
                         .Banks                  = 1,
                     },
-                .PrevReportINBuffer             = PrevRawHIDReportBuffer,
-                .PrevReportINBufferSize         = sizeof(PrevRawHIDReportBuffer),
+                .PrevReportINBuffer             = NULL,  // monkaS bare metal nullptr dereference
+                .PrevReportINBufferSize         = sizeof(default_settings),
             },
     };
 
@@ -241,9 +241,8 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
          * the device.
          */
         case FETCH_CONFIG_REPORT_ID: {
-            if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_Keyboard) SET_RIGHT_LED;
+            if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) SET_RIGHT_LED;
             if (ReportType == HID_REPORT_ITEM_Feature) {
-                // SET_RIGHT_LED;
                 uint8_t* buf    = (uint8_t*)ReportData;
                 uint16_t offset = 0;
 
@@ -272,9 +271,9 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                 buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
 
                 *ReportSize = offset;  // should be 200
-                // CLEAR_RIGHT_LED;
                 return true;
             }
+            if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) CLEAR_RIGHT_LED;
             return false;
         }
 
@@ -299,8 +298,10 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const uint16_t ReportSize)
 {
     uint8_t* params;
-    // TODO: Implement EEPROM update functions as Feature SetReport.
     switch (ReportID) {
+        // I really should be checking the interface ID here but I need to test
+        // whether this works first.
+
         // LED Status Update Report, size = 2
         //
         // Byte         0           1
@@ -322,62 +323,68 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
             break;
         }
 
-        // Keymap Edit Report, size = 4
-        // Params                   0           1           2
-        // Byte         0           1           2           3
-        // Meaning      ReportID    Row         Key         KeyCode
-        case EDIT_KEYMAP_REPORT_ID: {
-            // Check for malformed keymap edit reports
-            if (ReportSize != EDIT_KEYMAP_PARAMETERS_BYTES) break;
-            params = (uint8_t*)ReportData;
-            save_keymap_to_eeprom(params[0], params[1], params[2]);
-            KEYMAP_MATRIX[params[0]][params[1]] = params[2];
-            break;
+        // Custom commands
+        case CUSTOM_COMMAND_REPORT_ID: {
+            uint8_t command_id = *(uint8_t*)ReportData;
+            switch (command_id) {
+                // Keymap Edit Report, size = 4
+                // Params                   0           1           2
+                // Byte         0           1           2           3
+                // Meaning      CommandID   Row         Key         KeyCode
+                case EDIT_KEYMAP_COMMAND_ID: {
+                    // Check for malformed keymap edit reports
+                    if (ReportSize != EDIT_KEYMAP_COMMAND_BYTES + 1) break;
+                    // if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) SET_RIGHT_LED;
+                    params = (uint8_t*)(ReportData + 1);
+                    save_keymap_to_eeprom(params[0], params[1], params[2]);
+                    KEYMAP_MATRIX[params[0]][params[1]] = params[2];
+                    // if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) CLEAR_RIGHT_LED;
+                    break;
+                }
+                
+                // Actuations Edit Report, size = 4
+                // Params                   0           1           2
+                // Byte         0           1           2           3
+                // Meaning      CommandID   Row         Key         mm
+                case EDIT_ACTUATIONS_COMMAND_ID: {
+                    // Check for malformed actuation edit reports
+                    if (ReportSize != EDIT_ACTUATIONS_COMMAND_BYTES + 1) break;
+                    params = (uint8_t*)(ReportData + 1);
+                    save_actuation_to_eeprom(params[0], params[1], params[2]);
+                    ACTUATIONS_MATRIX[params[0]][params[1]] = params[2];
+                    break;
+                }
+
+                // SnapTap Modules Edit Report, size = 4
+                // Params                   0           1           2
+                // Byte         0           1           2           3
+                // Meaning      CommandID   ST Status   ST Key1     ST Key2
+                case EDIT_SNAPTAP_A_COMMAND_ID: {
+                    // Check for malformed actuation edit reports
+                    if (ReportSize != EDIT_SNAPTAP_COMMAND_BYTES + 1) break;
+                    params = (uint8_t*)(ReportData + 1);
+                    save_snaptap_a_to_eeprom(params[0], params[1], params[2]);
+                    SNAPTAP_A_STATUS = params[0];
+                    SNAPTAP_A_KEY1_COORDS = params[1];
+                    SNAPTAP_A_KEY2_COORDS = params[2];
+                    break;
+                }
+                case EDIT_SNAPTAP_B_COMMAND_ID: {
+                    // Check for malformed actuation edit reports
+                    if (ReportSize != EDIT_SNAPTAP_COMMAND_BYTES + 1) break;
+                    params = (uint8_t*)(ReportData + 1);
+                    save_snaptap_b_to_eeprom(params[0], params[1], params[2]);
+                    SNAPTAP_B_STATUS = params[0];
+                    SNAPTAP_B_KEY1_COORDS = params[1];
+                    SNAPTAP_B_KEY2_COORDS = params[2];
+                    break;
+                }
+                
+                default:
+                    break;
+            }
         }
         
-        // Actuation Point Edit Report, size = 4
-        // Params                   0           1           2
-        // Byte         0           1           2           3
-        // Meaning      ReportID    Row         Key         Actuation
-        case EDIT_ACTUATIONS_REPORT_ID: {
-            // Check for malformed actuation edit reports
-            if (ReportSize != EDIT_ACTUATIONS_PARAMETERS_BYTES) break;
-            params = (uint8_t*)ReportData;
-            save_actuation_to_eeprom(params[0], params[1], params[2]);
-            ACTUATIONS_MATRIX[params[0]][params[1]] = params[2];
-            break;
-        }
-
-        // SnapTap Module A Edit Report, size = 4
-        // Params                   0           1           2
-        // Byte         0           1           2           3
-        // Meaning      ReportID    ST Status   ST Key1     ST Key2
-        case EDIT_SNAPTAP_A_REPORT_ID: {
-            // Check for malformed actuation edit reports
-            if (ReportSize != EDIT_SNAPTAP_PARAMETERS_BYTES) break;
-            params = (uint8_t*)ReportData;
-            save_snaptap_a_to_eeprom(params[0], params[1], params[2]);
-            SNAPTAP_A_STATUS = params[0];
-            SNAPTAP_A_KEY1_COORDS = params[1];
-            SNAPTAP_A_KEY2_COORDS = params[2];
-            break;
-        }
-
-        // SnapTap Module A Edit Report, size = 4
-        // Params                   0           1           2
-        // Byte         0           1           2           3
-        // Meaning      ReportID    ST Status   ST Key1     ST Key2
-        case EDIT_SNAPTAP_B_REPORT_ID: {
-            // Check for malformed actuation edit reports
-            if (ReportSize != EDIT_SNAPTAP_PARAMETERS_BYTES) break;
-            params = (uint8_t*)ReportData;
-            save_snaptap_b_to_eeprom(params[0], params[1], params[2]);
-            SNAPTAP_B_STATUS = params[0];
-            SNAPTAP_B_KEY1_COORDS = params[1];
-            SNAPTAP_B_KEY2_COORDS = params[2];
-            break;
-        }
-
         default:
             break;
     }
