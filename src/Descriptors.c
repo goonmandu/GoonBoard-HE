@@ -49,18 +49,33 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
     HID_DESCRIPTOR_KEYBOARD(MAX_NKRO),
 };
 
+// HACK:
+// Every single RawHID report is implemented as a FEATURE REPORT for convenience.
+// It is a vendor-defined interface after all.
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM RawHIDReport[] = {
-    // Fetch Configuration Report
-    HID_RI_USAGE_PAGE(16, 0xFFA0),                  // Vendor-defined
-    HID_RI_USAGE(8, 0xA1),
+    HID_RI_USAGE_PAGE(16, 0xFF60),                  // Vendor-defined
+    HID_RI_USAGE(8, 0x61),
     HID_RI_COLLECTION(8, 0x01),                     // Application
+        // Fetch config report
+        // Split into its own ReportID because it is intended to send stuff back
         HID_RI_REPORT_ID(8, FETCH_CONFIG_REPORT_ID),
-        HID_RI_USAGE(8, 0xA2),
+        HID_RI_USAGE(8, 0x62),
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
         HID_RI_REPORT_SIZE(8, 0x08),
-        HID_RI_REPORT_COUNT(8, FETCH_CONFIG_REPORT_SIZE),
+        HID_RI_REPORT_COUNT(8, FETCH_CONFIG_REPORT_SIZE),  // Entire config in EEPROM
         HID_RI_FEATURE(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+        // Generic edit config report
+        HID_RI_REPORT_ID(8, CUSTOM_COMMAND_REPORT_ID),
+        HID_RI_USAGE(8, 0x63),
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),
+        HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
+        HID_RI_REPORT_SIZE(8, 0x08),
+        HID_RI_REPORT_COUNT(8, 0),  // No data is intended to be sent back
+        HID_RI_FEATURE(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+        // Edit actuation report
     HID_RI_END_COLLECTION(0)
 };
 
@@ -82,7 +97,7 @@ const USB_Descriptor_Device_t PROGMEM DeviceDescriptor =
 
     .VendorID               = 0x2B00,
     .ProductID              = 0xB1E5,
-    .ReleaseNumber          = VERSION_BCD(0,0,2),
+    .ReleaseNumber          = VERSION_BCD(0,0,1),
 
     .ManufacturerStrIndex   = STRING_ID_Manufacturer,
     .ProductStrIndex        = STRING_ID_Product,

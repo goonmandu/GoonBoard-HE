@@ -94,29 +94,29 @@
 /** 1 (ReportID) + 2 (Modifiers + Reserved) + 32KRO */
 /** [first byte required due to multiple ReportIDs and not just one IN report] */
 #define KEYBOARD_EPSIZE                 (1 + 2 + MAX_NKRO)
-#define RAWHID_IN_EPSIZE                (1 + FETCH_CONFIG_REPORT_SIZE)
-#define RAWHID_OUT_EPSIZE               (16)  // Reasonable amount
+#define RAWHID_IN_EPSIZE                (64)
+#define RAWHID_OUT_EPSIZE               (64)  // Reasonable amount
 
-    /* Report ID Codes */
+    /* Report ID/Command ID Codes */
         /** Keyboard Lock LEDs Request is the same as Keyboard HID ReportID */
         #define LOCK_LEDS_REPORT_ID                 HID_KEYBOARD_REPORT_ID
 
-        /** Runtime Keymap Edit Request */
-        #define EDIT_KEYMAP_REPORT_ID               0xA0
-        #define EDIT_KEYMAP_PARAMETERS_BYTES        4
-
-        /** Runtime Actuation Edit Request */
-        #define EDIT_ACTUATIONS_REPORT_ID           0xA1
-        #define EDIT_ACTUATIONS_PARAMETERS_BYTES    4
-
-        /** Runtime SnapTap Edit Request */
-        #define EDIT_SNAPTAP_A_REPORT_ID            0xB0
-        #define EDIT_SNAPTAP_B_REPORT_ID            0xB1
-        #define EDIT_SNAPTAP_PARAMETERS_BYTES       4
-
-        /** Runtime Fetch Configuration Request */
+        /** Fetch Configuration Request */
         #define FETCH_CONFIG_REPORT_ID              0xC0
-        #define FETCH_CONFIG_REPORT_SIZE            (2 * MAX_KEYS_SUPPORTED + 2 + 6)
+        #define FETCH_CONFIG_REPORT_SIZE            200  /** sizeof(default_settings) */ 
+
+        /** On-the-fly Edit Request IDs */
+        #define CUSTOM_COMMAND_REPORT_ID            0xFE
+
+        #define EDIT_KEYMAP_COMMAND_ID              0xA0
+        #define EDIT_KEYMAP_COMMAND_BYTES           4
+
+        #define EDIT_ACTUATIONS_COMMAND_ID          0xA1
+        #define EDIT_ACTUATIONS_COMMAND_BYTES       4
+
+        #define EDIT_SNAPTAP_A_COMMAND_ID           0xB0
+        #define EDIT_SNAPTAP_B_COMMAND_ID           0xB1
+        #define EDIT_SNAPTAP_COMMAND_BYTES          4
 
     /* Function Prototypes: */
     /*
