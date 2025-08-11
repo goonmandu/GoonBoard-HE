@@ -5,6 +5,8 @@
 .vscode/ipch
 platformio.ini
 
+firmwares
+
 schem/*
 !schem/pdfs/
 !schem/schem.kicad*a
