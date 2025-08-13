@@ -47,14 +47,13 @@
 /** Buffer to hold the previously generated Keyboard HID report, for comparison purposes inside the HID class driver. */
 uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 
-/** Buffer to hold the previously generated RawHID report */
-// uint8_t PrevRawHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
-
 /* START CUSTOMIZATION CODE */
 
 // Variables to detect keypresses
 extern uint8_t key_status[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
-static volatile uint8_t rpt_idx = 0;
+uint8_t rotary_now = ROTARY_STATE_A;
+uint8_t rotary_prev = ROTARY_STATE_A;
+int8_t rotary_counts = 0;
 
 /* END CUSTOMIZATION CODE */
 
@@ -116,10 +115,6 @@ void SetupHardware()
     PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 #endif
 
-    /* Hardware Initialization */
-    // Joystick_Init();
-    // LEDs_Init();
-    // Buttons_Init();
     USB_Init();
 }
 
@@ -183,98 +178,141 @@ void EVENT_USB_Device_StartOfFrame(void)
 // When called by the periodic HID generation function, `*ReportID` is zero and
 // this function should modify `*ReportID` to the ReportID of the HID keyboard
 // report (in this codebase, `HID_KEYBOARD_REPORT_ID`), then send the HID report.
+//
+// I am terribly sorry for the cruel and unusual levels of nesting.
 bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo,
                                          uint8_t* const ReportID,
                                          const uint8_t ReportType,
                                          void* ReportData,
                                          uint16_t* const ReportSize)
 {
-    switch (*ReportID) {
-        // This case is only taken with the periodic keyboard status polls
-        // Process normal keyboard report
-        case INTERNAL_GENERATE_PERIODIC_HID_REPORT_ID: {
-            if (ReportType == HID_REPORT_ITEM_In) {
-                // SET_LEFT_LED;
-                // Set outbound ReportID to the one specified in the descriptor
-                *ReportID = HID_KEYBOARD_REPORT_ID;
+    switch (HIDInterfaceInfo->Config.InterfaceNumber) {
+        case INTERFACE_ID_Keyboard: {
+            /** DO NOT MODIFY!
+             *  The HID Keyboard 32KRO interface is merely an extension of the boot protocol
+             *  to support 32 simultaneous keys. Everything else is compliant to the boot protocol.
+             *  If in Report Protocol mode, everything works as expected and the first 32 keys are registered.
+             *  If in Boot Protocol mode, only the first six keys pressed will be recognized.
+             */
+            switch (*ReportID) {
+                // This case is only taken with the periodic keyboard status polls
+                // Process normal keyboard report
+                case INTERNAL_GENERATE_PERIODIC_HID_REPORT_ID: {
+                    // Differentiate it between "Lock LED" OUT Reports
+                    if (ReportType == HID_REPORT_ITEM_In) {
+                        // Set outbound ReportID to the one specified in the descriptor
+                        // This does nothing right now because we're not using Report IDs for keyboards
+                        // which makes it default to the Report ID 0x00
+                        // *ReportID = HID_KEYBOARD_REPORT_ID;
 
-                USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
-                rpt_idx = 0;
+                        USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
+                        static uint8_t rpt_idx = 0;
 
-                // Scans keys and fills `key_status` based on whether RT is enabled
-                scan_keys();
+                        // Scans keys and fills `key_status` based on whether RT is enabled
+                        scan_keys();
 
-                // Filter SnapTap
-                static uint8_t* snaptap_a_restore_ptr;
-                static uint8_t snaptap_a_do_restore;
-                static uint8_t* snaptap_b_restore_ptr;
-                static uint8_t snaptap_b_do_restore;
-                if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED)
-                    snaptap_a_do_restore = snaptap(SNAPTAP_MODULE_A, &snaptap_a_restore_ptr);
-                if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED)
-                    snaptap_b_do_restore = snaptap(SNAPTAP_MODULE_B, &snaptap_b_restore_ptr);
+                        // Filter SnapTap
+                        static uint8_t* snaptap_a_restore_ptr;
+                        static uint8_t* snaptap_b_restore_ptr;
+                        static uint8_t snaptap_do_restore;
+                        if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED)
+                            snaptap_do_restore |= snaptap(SNAPTAP_MODULE_A, &snaptap_a_restore_ptr) << 0;
+                        if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED)
+                            snaptap_do_restore |= snaptap(SNAPTAP_MODULE_B, &snaptap_b_restore_ptr) << 1;
 
-                // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
-                // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
-                for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-                    for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW && rpt_idx < MAX_NKRO; ++key_idx) {
-                        if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
+                        // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
+                        // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
+                        for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
+                            for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW && rpt_idx < MAX_NKRO; ++key_idx) {
+                                if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
+                            }
+                        }
+
+                        // Restore keys overridden to SnapTap for Rapid Trigger compatibility
+                        if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED && (snaptap_do_restore & (1 << 0)))
+                            *snaptap_a_restore_ptr = PRESSED;
+                        if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED && (snaptap_do_restore & (1 << 1)))
+                            *snaptap_b_restore_ptr = PRESSED;
+                        
+                        
+                        // Rotary encoder section
+                        static uint8_t rotary_key;
+                        rotary_prev = rotary_now;
+                        rotary_now = PIND & ROTARY_MASK;
+                        if (rotary_prev != rotary_now) {
+                            rotary_key = determine_rotary_keycode();
+                            if (rotary_key != ROTARY_DIR_INVALID && rpt_idx < MAX_NKRO) {
+                                Rpt->KeyCode[rpt_idx++] = rotary_key;
+                            }
+                        }
+                        if (ROTARY_PB_PRESSED && rpt_idx < MAX_NKRO) {
+                            Rpt->KeyCode[rpt_idx++] = ROTARY_PUSHBUTTON_KEYMAP;
+                        }
+
+                        *ReportSize = sizeof(*Rpt);
+                        rpt_idx = 0;
+                        return false;
                     }
+                    return false;
                 }
-
-                // Restore keys overridden to SnapTap for Rapid Trigger compatibility
-                if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED && snaptap_a_do_restore)
-                    *snaptap_a_restore_ptr = PRESSED;
-                if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED && snaptap_b_do_restore)
-                    *snaptap_b_restore_ptr = PRESSED;
-
-                *ReportSize = sizeof(*Rpt);
-                // CLEAR_LEFT_LED;
-                return false;
+        
+                default:
+                    return false;
             }
             return false;
         }
 
-        /**
-         * Below this line contains everything that is NOT the periodically generated keyboard
-         * report and are coming from the host requesting information or interacting with
-         * the device.
-         */
-        case FETCH_CONFIG_REPORT_ID: {
-            if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) SET_RIGHT_LED;
-            if (ReportType == HID_REPORT_ITEM_Feature) {
-                uint8_t* buf    = (uint8_t*)ReportData;
-                uint16_t offset = 0;
+        case INTERFACE_ID_RawHID: {
+            switch (*ReportID) {
+                /**
+                 * Below this line contains everything that is NOT the periodically generated keyboard
+                 * report and are coming from the host requesting information or interacting with
+                 * the device.
+                 */
+                case FETCH_CONFIG_REPORT_ID: {
+                    if (ReportType == HID_REPORT_ITEM_Feature) {
+                        uint8_t* buf    = (uint8_t*)ReportData;
+                        uint16_t offset = 0;
 
-                // Copy keymap
-                eeprom_read_block(buf + offset,
-                                (const void*)&default_settings.keymap[0][0],
-                                sizeof default_settings.keymap);
-                offset += sizeof default_settings.keymap;  // +96
+                        // Copy keymap
+                        eeprom_read_block(buf + offset,
+                                        (const void*)&default_settings.keymap[0][0],
+                                        sizeof default_settings.keymap);
+                        offset += sizeof default_settings.keymap;  // +96
 
-                // Copy actuations
-                eeprom_read_block(buf + offset,
-                                (const void*)&default_settings.actuations[0][0],
-                                sizeof default_settings.actuations);
-                offset += sizeof default_settings.actuations;  // +96 (now offset=192)
+                        // Copy actuations
+                        eeprom_read_block(buf + offset,
+                                        (const void*)&default_settings.actuations[0][0],
+                                        sizeof default_settings.actuations);
+                        offset += sizeof default_settings.actuations;  // +96 (now offset=192)
 
-                // Copy thresholds
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
+                        // Copy rotary encoder
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rotary_counterclockwise);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rotary_clockwise);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rotary_pushbutton);
 
-                // Copy SnapTap settings
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_status);
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key1);
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key2);
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_status);
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key1);
-                buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
+                        // Copy thresholds
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_status);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
 
-                *ReportSize = offset;  // should be 200
-                return true;
+                        // Copy SnapTap settings
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_status);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key1);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_a_key2);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_status);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key1);
+                        buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
+
+                        *ReportSize = offset;  // should be 201
+                        return true;
+                    }
+                    return false;
+                }
+
+                default:
+                    return false;
             }
-            if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) CLEAR_RIGHT_LED;
-            return false;
         }
 
         default:
@@ -291,6 +329,8 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
  *  \param[in] ReportData  Pointer to a buffer where the received report has been stored
  *  \param[in] ReportSize  Size in bytes of the received HID report
  */
+
+// I am terribly sorry for the cruel and unusual levels of nesting.
 void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo,
                                           const uint8_t ReportID,
                                           const uint8_t ReportType,
@@ -298,94 +338,212 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const uint16_t ReportSize)
 {
     uint8_t* params;
-    switch (ReportID) {
-        // I really should be checking the interface ID here but I need to test
-        // whether this works first.
+    switch (HIDInterfaceInfo->Config.InterfaceNumber) {
+        case INTERFACE_ID_Keyboard: {
+            /** DO NOT MODIFY!
+             *  The HID Keyboard 32KRO interface is merely an extension of the boot protocol
+             *  to support 32 simultaneous keys. Everything else is compliant to the boot protocol.
+             *  If in Report Protocol mode, everything works as expected and the first 32 keys are registered.
+             *  If in Boot Protocol mode, only the first six keys pressed will be recognized.
+             */
+            switch (ReportID) {
+                // LED Status Update Report, size = 2
+                //
+                // Byte         0           1
+                // Meaning      ReportID    LED Bits
+                case LOCK_LEDS_REPORT_ID: {
+                    uint8_t* LEDReport = (uint8_t*)ReportData;
+                    if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
+                        numlock_on();
+                    else
+                        numlock_off();
+                    if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
+                        capslock_on();
+                    else
+                        capslock_off();
+                    if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
+                        scrlock_on();
+                    else
+                        scrlock_off();
+                    break;
+                }
 
-        // LED Status Update Report, size = 2
-        //
-        // Byte         0           1
-        // Meaning      ReportID    LED Bits
-        case LOCK_LEDS_REPORT_ID: {
-            uint8_t* LEDReport = (uint8_t*)ReportData;
-            if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
-                numlock_on();
-            else
-                numlock_off();
-            if (*LEDReport & HID_KEYBOARD_LED_CAPSLOCK)
-                capslock_on();
-            else
-                capslock_off();
-            if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
-                scrlock_on();
-            else
-                scrlock_off();
+                default:
+                    break;
+            }
             break;
         }
 
         // Custom commands
-        case CUSTOM_COMMAND_REPORT_ID: {
-            uint8_t command_id = *(uint8_t*)ReportData;
-            switch (command_id) {
-                // Keymap Edit Report, size = 4
-                // Params                   0           1           2
-                // Byte         0           1           2           3
-                // Meaning      CommandID   Row         Key         KeyCode
-                case EDIT_KEYMAP_COMMAND_ID: {
-                    // Check for malformed keymap edit reports
-                    if (ReportSize != EDIT_KEYMAP_COMMAND_BYTES + 1) break;
-                    // if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) SET_RIGHT_LED;
-                    params = (uint8_t*)(ReportData + 1);
-                    save_keymap_to_eeprom(params[0], params[1], params[2]);
-                    KEYMAP_MATRIX[params[0]][params[1]] = params[2];
-                    // if (HIDInterfaceInfo->Config.InterfaceNumber == INTERFACE_ID_RawHID) CLEAR_RIGHT_LED;
-                    break;
-                }
-                
-                // Actuations Edit Report, size = 4
-                // Params                   0           1           2
-                // Byte         0           1           2           3
-                // Meaning      CommandID   Row         Key         mm
-                case EDIT_ACTUATIONS_COMMAND_ID: {
-                    // Check for malformed actuation edit reports
-                    if (ReportSize != EDIT_ACTUATIONS_COMMAND_BYTES + 1) break;
-                    params = (uint8_t*)(ReportData + 1);
-                    save_actuation_to_eeprom(params[0], params[1], params[2]);
-                    ACTUATIONS_MATRIX[params[0]][params[1]] = params[2];
-                    break;
-                }
+        case INTERFACE_ID_RawHID: {
+            switch (ReportID) {
+                case CUSTOM_COMMAND_REPORT_ID: {
+                    uint8_t command_id = *(uint8_t*)ReportData;
+                    switch (command_id) {
+                        // Keymap Edit Report, size = 4
+                        // Params                   0           1           2
+                        // Byte         0           1           2           3
+                        // Meaning      CommandID   Row         Key         KeyCode
+                        case EDIT_KEYMAP_COMMAND_ID: {
+                            // Check for malformed keymap edit reports
+                            if (ReportSize != EDIT_KEYMAP_COMMAND_BYTES + 1) break;
+                            params = (uint8_t*)(ReportData + 1);
+                            save_keymap_to_eeprom(params[0], params[1], params[2]);
+                            KEYMAP_MATRIX[params[0]][params[1]] = params[2];
+                            break;
+                        }
+                        
+                        // Actuations Edit Report, size = 4
+                        // Params                   0           1           2
+                        // Byte         0           1           2           3
+                        // Meaning      CommandID   Row         Key         mm
+                        case EDIT_ACTUATIONS_COMMAND_ID: {
+                            // Check for malformed actuation edit reports
+                            if (ReportSize != EDIT_ACTUATIONS_COMMAND_BYTES + 1) break;
+                            params = (uint8_t*)(ReportData + 1);
+                            save_actuation_to_eeprom(params[0], params[1], params[2]);
+                            ACTUATIONS_MATRIX[params[0]][params[1]] = params[2];
+                            break;
+                        }
 
-                // SnapTap Modules Edit Report, size = 4
-                // Params                   0           1           2
-                // Byte         0           1           2           3
-                // Meaning      CommandID   ST Status   ST Key1     ST Key2
-                case EDIT_SNAPTAP_A_COMMAND_ID: {
-                    // Check for malformed actuation edit reports
-                    if (ReportSize != EDIT_SNAPTAP_COMMAND_BYTES + 1) break;
-                    params = (uint8_t*)(ReportData + 1);
-                    save_snaptap_a_to_eeprom(params[0], params[1], params[2]);
-                    SNAPTAP_A_STATUS = params[0];
-                    SNAPTAP_A_KEY1_COORDS = params[1];
-                    SNAPTAP_A_KEY2_COORDS = params[2];
-                    break;
-                }
-                case EDIT_SNAPTAP_B_COMMAND_ID: {
-                    // Check for malformed actuation edit reports
-                    if (ReportSize != EDIT_SNAPTAP_COMMAND_BYTES + 1) break;
-                    params = (uint8_t*)(ReportData + 1);
-                    save_snaptap_b_to_eeprom(params[0], params[1], params[2]);
-                    SNAPTAP_B_STATUS = params[0];
-                    SNAPTAP_B_KEY1_COORDS = params[1];
-                    SNAPTAP_B_KEY2_COORDS = params[2];
-                    break;
-                }
-                
+                        // Actuations Edit Report, size = 4
+                        // Params                   0           1           2
+                        // Byte         0           1           2           3
+                        // Meaning      CommandID   CtClkw      Clkw        Button
+                        case EDIT_ROTARY_KEYMAP_COMMAND_ID: {
+                            // Check for malformed actuation edit reports
+                            if (ReportSize != EDIT_ACTUATIONS_COMMAND_BYTES + 1) break;
+                            params = (uint8_t*)(ReportData + 1);
+                            save_rotary_encoder_to_eeprom(params[0], params[1], params[2]);
+                            ROTARY_COUNTERCLOCKWISE_KEYMAP = params[0];
+                            ROTARY_CLOCKWISE_KEYMAP = params[1];
+                            ROTARY_PUSHBUTTON_KEYMAP = params[2];
+                            break;
+                        }
+
+                        // SnapTap Modules Edit Report, size = 4
+                        // Params                   0           1           2
+                        // Byte         0           1           2           3
+                        // Meaning      CommandID   ST Status   ST Key1     ST Key2
+                        case EDIT_SNAPTAP_A_COMMAND_ID: {
+                            // Check for malformed actuation edit reports
+                            if (ReportSize != EDIT_SNAPTAP_COMMAND_BYTES + 1) break;
+                            params = (uint8_t*)(ReportData + 1);
+                            save_snaptap_a_to_eeprom(params[0], params[1], params[2]);
+                            SNAPTAP_A_STATUS = params[0];
+                            SNAPTAP_A_KEY1_COORDS = params[1];
+                            SNAPTAP_A_KEY2_COORDS = params[2];
+                            break;
+                        }
+                        case EDIT_SNAPTAP_B_COMMAND_ID: {
+                            // Check for malformed snaptap edit reports
+                            if (ReportSize != EDIT_SNAPTAP_COMMAND_BYTES + 1) break;
+                            params = (uint8_t*)(ReportData + 1);
+                            save_snaptap_b_to_eeprom(params[0], params[1], params[2]);
+                            SNAPTAP_B_STATUS = params[0];
+                            SNAPTAP_B_KEY1_COORDS = params[1];
+                            SNAPTAP_B_KEY2_COORDS = params[2];
+                            break;
+                        }
+                        
+                        // Rapid Trigger Edit Report, size = 4
+                        case EDIT_RAPID_TRIGGER_COMMAND_ID: {
+                            // Check for malformed rapid trigger edit reports
+                            if (ReportSize != EDIT_RAPID_TRIGGER_COMMAND_BYTES + 1) break;
+                            params = (uint8_t*)(ReportData + 1);
+                            save_rapid_trigger_to_eeprom(params[0], params[1], params[2]);
+                            RAPID_TRIGGER_STATUS = params[0];
+                            RAPID_TRIGGER_THRESHOLD = params[1];
+                            RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD = params[2];
+                            break;
+                        }
+
+                        default:
+                            break;
+            }
+        }
+
                 default:
                     break;
             }
+            break;
         }
         
         default:
             break;
+    }
+}
+
+// Determines rotary encoder direction and returns the appropriate keycode.
+uint8_t determine_rotary_keycode() {
+    switch (rotary_prev) {
+        case (ROTARY_STATE_A):
+            if (rotary_now == ROTARY_STATE_B) {
+                // Clockwise
+                if (++rotary_counts == 4) {
+                    rotary_counts = 0;
+                    return ROTARY_CLOCKWISE_KEYMAP;
+                }
+            }
+            if (rotary_now == ROTARY_STATE_D) {
+                // Counterclockwise
+                if (--rotary_counts == -4) {
+                    rotary_counts = 0;
+                    return ROTARY_COUNTERCLOCKWISE_KEYMAP;
+                }
+            }
+            return ROTARY_DIR_INVALID;
+
+        case (ROTARY_STATE_B):
+            if (rotary_now == ROTARY_STATE_C) {
+                // Clockwise
+                if (++rotary_counts == 4) {
+                    rotary_counts = 0;
+                    return ROTARY_CLOCKWISE_KEYMAP;
+                }
+            }
+            if (rotary_now == ROTARY_STATE_A) {
+                // Counterclockwise
+                if (--rotary_counts == -4) {
+                    rotary_counts = 0;
+                    return ROTARY_COUNTERCLOCKWISE_KEYMAP;
+                }
+            }
+            return ROTARY_DIR_INVALID;
+
+        case (ROTARY_STATE_C):
+            if (rotary_now == ROTARY_STATE_D) {
+                // Clockwise
+                if (++rotary_counts == 4) {
+                    rotary_counts = 0;
+                    return ROTARY_CLOCKWISE_KEYMAP;
+                }
+            }
+            if (rotary_now == ROTARY_STATE_B) {
+                // Counterclockwise
+                if (--rotary_counts == -4) {
+                    rotary_counts = 0;
+                    return ROTARY_COUNTERCLOCKWISE_KEYMAP;
+                }
+            }
+            return ROTARY_DIR_INVALID;
+        
+        // case (ROTARY_STATE_D):
+        default:
+            if (rotary_now == ROTARY_STATE_A) {
+                // Clockwise
+                if (++rotary_counts == 4) {
+                    rotary_counts = 0;
+                    return ROTARY_CLOCKWISE_KEYMAP;
+                }
+            }
+            if (rotary_now == ROTARY_STATE_C) {
+                // Counterclockwise
+                if (--rotary_counts == -4) {
+                    rotary_counts = 0;
+                    return ROTARY_COUNTERCLOCKWISE_KEYMAP;
+                }
+            }
+            return ROTARY_DIR_INVALID;
     }
 }

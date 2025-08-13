@@ -16,7 +16,6 @@
 void spi_init_master(void);
 uint8_t spi_transfer(uint8_t data);
 uint8_t spi_read(void);
-uint8_t spi_read_skip_first_bit_mode3(void);
 void spi_select_slave(void);
 void spi_deselect_slave(void);
 

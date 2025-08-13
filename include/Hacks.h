@@ -3,10 +3,10 @@
 
 
 #ifdef DEBUG_BITS
-    // PD7 is Logic Analyzer Debug Bit
-    #define DEBUG_BIT_PIN_CONFIG do { DDRD |= (1 << PD7); } while (0)
-    #define SET_DEBUG_BIT do { PORTD |= (1 << PD7); } while (0)
-    #define CLEAR_DEBUG_BIT do { PORTD &= ~(1 << PD7); } while (0)
+    // PB5 is Logic Analyzer Debug Bit
+    #define DEBUG_BIT_PIN_CONFIG do { DDRB |= (1 << PB5); } while (0)
+    #define SET_DEBUG_BIT do { PORTB |= (1 << PB5); } while (0)
+    #define CLEAR_DEBUG_BIT do { PORTB &= ~(1 << PB5); } while (0)
 
     #define SET_LEFT_LED do { PORTB &= ~(1 << PB0); } while (0)
     #define CLEAR_LEFT_LED do { PORTB |= (1 << PB0); } while (0)

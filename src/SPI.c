@@ -1,10 +1,11 @@
 #include "SPI.h"
+#include "Hacks.h"
 
 void spi_init_master(void) {
     /* MOSI, SCK, SS outputs; MISO input */
-    DDRB |= (1 << SPI_MOSI)
-          |  (1 << SPI_SCK)
-          |  (1 << SPI_SS_PIN);
+    DDRB |= (1 << SPI_SCK)
+          |  (1 << SPI_SS_PIN)
+          |  (1 << SPI_MOSI);
     DDRB &= ~(1 << SPI_MISO);
 
     /* Deselect slave (idle high) */
@@ -29,19 +30,6 @@ uint8_t spi_transfer(uint8_t data) {
 
 uint8_t spi_read(void) {
     return spi_transfer(0xFF);
-}
-
-uint8_t spi_read_skip_first_bit_mode3(void) {
-    SPCR &= ~(1 << SPE);
-    PORTB |= (1 << SPI_SCK);
-    PORTB &= ~(1 << SPI_SCK);
-    PORTB |= (1 << SPI_SCK);
-
-    (void)SPSR;
-    (void)SPDR;
-
-    SPCR |= (1 << SPE);
-    return spi_read();
 }
 
 void spi_select_slave(void) {

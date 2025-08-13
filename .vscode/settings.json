@@ -69,6 +69,9 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "descriptors.h": "c"
+    "descriptors.h": "c",
+    "defaultsettings.h": "c",
+    "settingseditor.h": "c",
+    "keyboardconfig.h": "c"
   }
 }

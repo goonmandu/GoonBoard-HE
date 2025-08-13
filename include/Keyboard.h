@@ -68,8 +68,26 @@ extern "C" {
 
         #define PREV_REPORT_BUFFER_SIZE     (255)
 
+        /** Rotary Encoder */
+        #define ROTARY_SIGPB                PC6
+        #define ROTARY_PB_PRESSED           (!(PINC & (1 << ROTARY_SIGPB)))  // Active low
+        #define ROTARY_SIGCLK               PD4  // "Signal A"
+        #define ROTARY_SIGDT                PD7  // "Signal B"
+        #define ROTARY_MASK                 ((uint8_t)((1 << ROTARY_SIGCLK) | (1 << ROTARY_SIGDT)))
+
+        // Gray-coded quadrature rotary encoder
+        #define ROTARY_STATE_A              ((uint8_t)((0 << ROTARY_SIGCLK) | (0 << ROTARY_SIGDT)))
+        #define ROTARY_STATE_B              ((uint8_t)((1 << ROTARY_SIGCLK) | (0 << ROTARY_SIGDT)))
+        #define ROTARY_STATE_C              ((uint8_t)((1 << ROTARY_SIGCLK) | (1 << ROTARY_SIGDT)))
+        #define ROTARY_STATE_D              ((uint8_t)((0 << ROTARY_SIGCLK) | (1 << ROTARY_SIGDT)))
+
+        #define ROTARY_DIR_INVALID          0
+        #define ROTARY_DIR_COUNTERCLOCKWISE 1
+        #define ROTARY_DIR_CLOCKWISE        2
+
     /* Function Prototypes: */
         void SetupHardware(void);
+
 
         void EVENT_USB_Device_Connect(void);
         void EVENT_USB_Device_Disconnect(void);
@@ -87,7 +105,12 @@ extern "C" {
                                                   const uint8_t ReportType,
                                                   const void* ReportData,
                                                   const uint16_t ReportSize);
-
+        
+        uint8_t determine_rotary_keycode();
+    
+    /* Variable declarations */
+        extern uint8_t rotary_prev;
+        extern uint8_t rotary_now;
 #endif
 
 #ifdef __cplusplus

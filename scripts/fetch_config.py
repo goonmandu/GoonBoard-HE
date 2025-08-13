@@ -10,15 +10,22 @@ NUM_ROWS = 6
 NUM_COLS = 16
 KEYMAP_SIZE = NUM_ROWS * NUM_COLS
 ACTUATION_SIZE = KEYMAP_SIZE
-THRESHOLD_SIZE = 2
+THRESHOLD_SIZE = 3
 SNAPTAP_SIZE = 6
 FULL_CONFIG_SIZE = KEYMAP_SIZE + ACTUATION_SIZE + THRESHOLD_SIZE + SNAPTAP_SIZE
 
 
 def main():
     try:
-        dev = hid.device()
-        dev.open(VID, PID)
+        devs = hid.enumerate()
+        dev = None
+        for d in devs:
+            if d['vendor_id'] == VID and d['product_id'] == PID and d['interface_number'] == 1:
+                dev = d
+        if dev:
+            dev.open(path=dev['path'])
+        else:
+            raise Exception("Could not find such device/interface")
     except Exception as e:
         print(f"Error opening HID device {VID:04X}:{PID:04X}: {e}", file=sys.stderr)
         sys.exit(1)
@@ -70,7 +77,8 @@ def main():
     print()
 
     # Print thresholds
-    rt, rt_sc = thresholds
+    rt_en, rt, rt_sc = thresholds
+    print(f"RT:{"On" if rt_en else "Off"}")
     print(f"RT threshold: {rt/10}mm")
     print(f"RT SC threshold: {rt_sc/10}mm")
     print()

@@ -44,6 +44,11 @@ volatile keyboard_settings_t EEMEM default_settings = {
          MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(1.5), MM(1.5)}
     },
 
+    .rotary_counterclockwise = KC_MEDIA_VOL_DOWN,
+    .rotary_clockwise = KC_MEDIA_VOL_UP,
+    .rotary_pushbutton = KC_MEDIA_PLAY,
+
+    .rt_status = false,
     .rt_threshold = MM(0.3),
     .rt_sc_threshold = MM(0.3),
 

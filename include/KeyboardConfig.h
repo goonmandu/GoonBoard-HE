@@ -53,6 +53,11 @@ extern const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS];
 extern volatile uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern volatile uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 
+extern volatile uint8_t ROTARY_COUNTERCLOCKWISE_KEYMAP;
+extern volatile uint8_t ROTARY_CLOCKWISE_KEYMAP;
+extern volatile uint8_t ROTARY_PUSHBUTTON_KEYMAP;
+
+extern volatile uint8_t RAPID_TRIGGER_STATUS;
 extern volatile uint8_t RAPID_TRIGGER_THRESHOLD;
 extern volatile uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD;
 extern const uint8_t RAPID_TRIGGER_IDLE_HYSTERESIS;

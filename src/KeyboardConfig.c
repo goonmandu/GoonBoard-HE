@@ -33,7 +33,13 @@ const uint8_t NUM_KEYS_PER_ROW[NUM_ROWS] = {
 volatile uint8_t KEYMAP_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = { { 0 } };
 volatile uint8_t ACTUATIONS_MATRIX[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW] = { { 0 } };
 
+// Allocate the rotary encoder maps
+volatile uint8_t ROTARY_COUNTERCLOCKWISE_KEYMAP = 0;
+volatile uint8_t ROTARY_CLOCKWISE_KEYMAP = 0;
+volatile uint8_t ROTARY_PUSHBUTTON_KEYMAP = 0;
+
 // Allocate the rapid-trigger thresholds
+volatile uint8_t RAPID_TRIGGER_STATUS = 0;
 volatile uint8_t RAPID_TRIGGER_THRESHOLD = 0;
 volatile uint8_t RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD = 0;
 

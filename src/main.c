@@ -12,10 +12,6 @@ extern USB_ClassInfo_HID_Device_t RawHID_HID_Interface;
 int main(void) {
     SetupHardware();
 
-    // PC6 is Rapid-Trigger Enable
-    DDRC &= ~(1 << PC6);  // Set PC6 as input
-    PORTC |= (1 << PC6);  // Enable pull-up
-
     DEBUG_BIT_PIN_CONFIG;
     CLEAR_DEBUG_BIT;
 
@@ -25,6 +21,10 @@ int main(void) {
 
     load_eeprom_to_sram();
     measure_adc_baseline();
+
+    // Configure rotary encoder input pins
+    DDRD &= ~ROTARY_MASK;
+    DDRC &= ~(1 << ROTARY_SIGPB);
 
     // Turn off Pro Micro TX/RX LEDs
     DDRB |= (1 << PB0);

@@ -77,14 +77,8 @@ void scan_keys() {
             spi_lo = spi_read();
             spi_deselect_slave();
             asm volatile(
-                "push   r16         \n\t"
-                "in     r16,    %2  \n\t"
-                "push   r16         \n\t"
-                "rol    %1          \n\t"
+                "lsl    %1          \n\t"
                 "rol    %0          \n\t"
-                "pop    r16         \n\t"
-                "out    %2,     r16 \n\t"
-                "pop    r16         \n\t"
                 : "+r"(spi_hi), "+r"(spi_lo)
                 : "I"(_SFR_IO_ADDR(SREG))
                 : "r16", "cc"
@@ -99,23 +93,18 @@ void scan_keys() {
             // ADC halfscale = 0x7F at B = 0
             // Entire codebase assumes negative polarity switches
             if (spi_hi > 0x7F) {
-                // Mux t_pd
-                // ASM_NOP; ASM_NOP;
                 key_idx++;
                 continue;
             }
             
             // Only execute rapid trigger part when enabled
-            if (!RAPID_TRIGGER_ENABLED) {
+            if (!RAPID_TRIGGER_STATUS) {
                 if (ADC_BASELINE[row_idx][key_idx] - adc_values[row_idx][key_idx] >= ACTUATIONS_MATRIX[row_idx][key_idx]) {
                     key_status[row_idx][key_idx] = PRESSED;
                 }
                 else {
                     key_status[row_idx][key_idx] = RELEASED;
                 }
-
-                // Mux t_pd
-                // ASM_NOP; ASM_NOP;
             }
             else {
                 // Rapid Trigger!
@@ -177,9 +166,6 @@ void scan_keys() {
                         key_status[row_idx][key_idx] = RELEASED;
                     }
                 }
-                
-                // Mux t_pd
-                // ASM_NOP; ASM_NOP;
             }
             key_idx++;
         }

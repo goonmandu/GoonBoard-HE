@@ -13,8 +13,6 @@
 #define RELEASED 0
 #define PRESSED  1
 
-#define RAPID_TRIGGER_ENABLED (!(PINC & (1 << PC6)))
-
 extern uint8_t values_buf_0[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t values_buf_1[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];
 extern uint8_t adc_maxima[NUM_ROWS][MAX_KEYS_SUPPORTED_PER_ROW];

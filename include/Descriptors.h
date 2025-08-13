@@ -93,7 +93,7 @@
 /** Size in bytes of the Keyboard HID reporting IN endpoint. */
 /** 1 (ReportID) + 2 (Modifiers + Reserved) + 32KRO */
 /** [first byte required due to multiple ReportIDs and not just one IN report] */
-#define KEYBOARD_EPSIZE                 (1 + 2 + MAX_NKRO)
+#define KEYBOARD_EPSIZE                 (64)
 #define RAWHID_IN_EPSIZE                (64)
 #define RAWHID_OUT_EPSIZE               (64)  // Reasonable amount
 
@@ -103,7 +103,7 @@
 
         /** Fetch Configuration Request */
         #define FETCH_CONFIG_REPORT_ID              0xC0
-        #define FETCH_CONFIG_REPORT_SIZE            200  /** sizeof(default_settings) */ 
+        #define FETCH_CONFIG_REPORT_SIZE            204  /** sizeof(default_settings) */ 
 
         /** On-the-fly Edit Request IDs */
         #define CUSTOM_COMMAND_REPORT_ID            0xFE
@@ -114,9 +114,17 @@
         #define EDIT_ACTUATIONS_COMMAND_ID          0xA1
         #define EDIT_ACTUATIONS_COMMAND_BYTES       4
 
+        #define EDIT_ROTARY_KEYMAP_COMMAND_ID       0xA2
+        #define EDIT_ROTARY_KEYMAP_COMMAND_BYTES    4
+
         #define EDIT_SNAPTAP_A_COMMAND_ID           0xB0
         #define EDIT_SNAPTAP_B_COMMAND_ID           0xB1
         #define EDIT_SNAPTAP_COMMAND_BYTES          4
+
+        #define EDIT_RAPID_TRIGGER_COMMAND_ID       0xD0
+        #define EDIT_RAPID_TRIGGER_COMMAND_BYTES    4
+
+        
 
     /* Function Prototypes: */
     /*

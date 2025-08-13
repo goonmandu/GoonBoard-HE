@@ -10,7 +10,12 @@ void load_eeprom_to_sram(void) {
     // Load EEPROM actuations to SRAM
     eeprom_read_block((void*)ACTUATIONS_MATRIX, (const void*)&default_settings.actuations, MAX_KEYS_SUPPORTED);
 
+    ROTARY_COUNTERCLOCKWISE_KEYMAP = eeprom_read_byte((const uint8_t*)&default_settings.rotary_counterclockwise);
+    ROTARY_CLOCKWISE_KEYMAP = eeprom_read_byte((const uint8_t*)&default_settings.rotary_clockwise);
+    ROTARY_PUSHBUTTON_KEYMAP = eeprom_read_byte((const uint8_t*)&default_settings.rotary_pushbutton);
+
     // Load EEPROM RT configs to SRAM
+    RAPID_TRIGGER_STATUS = eeprom_read_byte((const uint8_t*)&default_settings.rt_status);
     RAPID_TRIGGER_THRESHOLD = eeprom_read_byte((const uint8_t*)&default_settings.rt_threshold);
     RAPID_TRIGGER_SHORT_CIRCUIT_THRESHOLD = eeprom_read_byte((const uint8_t*)&default_settings.rt_sc_threshold);
 
@@ -79,5 +84,35 @@ void save_snaptap_b_to_eeprom(uint8_t snaptap_status, uint8_t key1, uint8_t key2
     eeprom_update_byte(
         (uint8_t*)(&default_settings.snaptap_b_key2),
         key2
+    );
+}
+
+void save_rapid_trigger_to_eeprom(uint8_t rt_status, uint8_t rt_threshold, uint8_t rt_sc_threshold) {
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.rt_status),
+        rt_status
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.rt_threshold),
+        rt_threshold
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.rt_sc_threshold),
+        rt_sc_threshold
+    );
+}
+
+void save_rotary_encoder_to_eeprom(uint8_t ctclkw, uint8_t clkw, uint8_t pb) {
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.rotary_counterclockwise),
+        ctclkw
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.rotary_clockwise),
+        clkw
+    );
+    eeprom_update_byte(
+        (uint8_t*)(&default_settings.rotary_pushbutton),
+        pb
     );
 }
