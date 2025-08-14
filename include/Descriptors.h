@@ -67,8 +67,8 @@
          */
         enum InterfaceDescriptors_t
         {
-            INTERFACE_ID_Keyboard = 0, /**< Keyboard interface descriptor ID */
-            INTERFACE_ID_RawHID   = 1, /**< RawHID interface descriptor ID */
+            INTERFACE_ID_Keyboard       = 0, /**< Keyboard interface descriptor ID */
+            INTERFACE_ID_RawHID         = 1, /**< RawHID interface descriptor ID */
         };
 
         /** Enum for the device string descriptor IDs within the device. Each string descriptor should
@@ -86,16 +86,14 @@
         /** Endpoint address of the Keyboard HID reporting IN endpoint. */
         #define KEYBOARD_EPADDR                 (ENDPOINT_DIR_IN | 1)
 
-        /** Endpoint addresses of the RawHID interface */
+        /** Endpoint addresses of the RawHID interface. */
         #define RAWHID_IN_EPADDR                (ENDPOINT_DIR_IN | 2)
-        #define RAWHID_OUT_EPADDR               (ENDPOINT_DIR_OUT | 3)
+        #define RAWHID_OUT_EPADDR               (ENDPOINT_DIR_OUT | 3)  // Unused
 
-/** Size in bytes of the Keyboard HID reporting IN endpoint. */
-/** 1 (ReportID) + 2 (Modifiers + Reserved) + 32KRO */
-/** [first byte required due to multiple ReportIDs and not just one IN report] */
+/** Size in bytes of the endpoints. */
 #define KEYBOARD_EPSIZE                 (64)
 #define RAWHID_IN_EPSIZE                (64)
-#define RAWHID_OUT_EPSIZE               (64)  // Reasonable amount
+#define RAWHID_OUT_EPSIZE               (64)
 
     /* Report ID/Command ID Codes */
         /** Keyboard Lock LEDs Request is the same as Keyboard HID ReportID */
@@ -124,7 +122,6 @@
         #define EDIT_RAPID_TRIGGER_COMMAND_ID       0xD0
         #define EDIT_RAPID_TRIGGER_COMMAND_BYTES    4
 
-        
 
     /* Function Prototypes: */
     /*

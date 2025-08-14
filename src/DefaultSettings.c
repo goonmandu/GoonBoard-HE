@@ -3,7 +3,7 @@
 #include "DefaultSettings.h"
 #include "Keycodes.h"
 
-volatile keyboard_settings_t EEMEM default_settings = {
+keyboard_settings_t EEMEM default_settings = {
     #ifndef PROTO_BOARD
     .keymap = {
         {KC_ESCAPE, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12},
