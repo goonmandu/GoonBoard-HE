@@ -45,8 +45,7 @@
  *  more details on HID report descriptors.
  */
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
-    // Report Protocol Keyboard HID
-    HID_DESCRIPTOR_KEYBOARD(MAX_NKRO),
+    HID_DESCRIPTOR_NKRO_KEYBOARD,
 };
 
 // HACK:
@@ -78,6 +77,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM RawHIDReport[] = {
         // Edit actuation report
     HID_RI_END_COLLECTION(0)
 };
+
 
 /** Device descriptor structure. This descriptor, located in FLASH memory, describes the overall
  *  device characteristics, including the supported USB version, control endpoint size and the

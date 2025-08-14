@@ -423,11 +423,11 @@
          *
          *  \param[in] MaxKeys  Number of simultaneous keys that can be reported at the one time (8-bit).
          */
-        #define HID_DESCRIPTOR_KEYBOARD(MaxKeys)            \
+        // Experimental NKRO
+        #define HID_DESCRIPTOR_NKRO_KEYBOARD            \
         HID_RI_USAGE_PAGE(8, 0x01),                     \
         HID_RI_USAGE(8, 0x06),                          \
         HID_RI_COLLECTION(8, 0x01),                     \
-            /* HID_RI_REPORT_ID(8, HID_KEYBOARD_REPORT_ID), */ \
             HID_RI_USAGE_PAGE(8, 0x07),                 \
             HID_RI_USAGE_MINIMUM(8, 0xE0),              \
             HID_RI_USAGE_MAXIMUM(8, 0xE7),              \
@@ -444,18 +444,18 @@
             HID_RI_USAGE_MAXIMUM(8, 0x05),              \
             HID_RI_REPORT_COUNT(8, 0x05),               \
             HID_RI_REPORT_SIZE(8, 0x01),                \
-            HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_NON_VOLATILE), \
+            HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_VOLATILE), \
             HID_RI_REPORT_COUNT(8, 0x01),               \
             HID_RI_REPORT_SIZE(8, 0x03),                \
             HID_RI_OUTPUT(8, HID_IOF_CONSTANT),         \
             HID_RI_LOGICAL_MINIMUM(8, 0x00),            \
-            HID_RI_LOGICAL_MAXIMUM(16, 0xFF),           \
+            HID_RI_LOGICAL_MAXIMUM(8, 0x01),            \
             HID_RI_USAGE_PAGE(8, 0x07),                 \
             HID_RI_USAGE_MINIMUM(8, 0x00),              \
             HID_RI_USAGE_MAXIMUM(8, 0xFF),              \
-            HID_RI_REPORT_COUNT(8, MaxKeys),            \
-            HID_RI_REPORT_SIZE(8, 0x08),                \
-            HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_ARRAY | HID_IOF_ABSOLUTE), \
+            HID_RI_REPORT_COUNT(16, 0x0100),            \
+            HID_RI_REPORT_SIZE(8, 0x01),                \
+            HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE), \
         HID_RI_END_COLLECTION(0)
 
         /** \hideinitializer
@@ -669,7 +669,7 @@
                                *   \c HID_KEYBOARD_MODIFER_* masks).
                                */
             uint8_t Reserved; /**< Reserved for OEM use, always set to 0. */
-            uint8_t KeyCode[MAX_NKRO]; /**< Key codes of the currently pressed keys. */
+            uint8_t KeyCode[32]; /**< Key codes of the currently pressed keys. */
         } ATTR_PACKED USB_KeyboardReport_Data_t;
 
         /** Type define for the data type used to store HID report descriptor elements. */

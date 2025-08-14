@@ -64,8 +64,8 @@ void scan_keys() {
     adc_values = old_values;
     old_values = tmp;
 
-    uint8_t row_idx = 0;
-    uint8_t key_idx = 0;
+    register uint8_t row_idx = 0;
+    register uint8_t key_idx = 0;
     PORTD = row_idx | (1 << PD5);
     PORTF = key_idx << 4;
 
@@ -80,8 +80,8 @@ void scan_keys() {
                 "lsl    %1          \n\t"
                 "rol    %0          \n\t"
                 : "+r"(spi_hi), "+r"(spi_lo)
-                : "I"(_SFR_IO_ADDR(SREG))
-                : "r16", "cc"
+                :
+                : "cc"
             );
 
             // By incrementing keys mux between ADC read and doing processing,

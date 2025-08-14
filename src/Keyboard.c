@@ -139,8 +139,6 @@ void EVENT_USB_Device_ConfigurationChanged(void)
     ConfigSuccess &= HID_Device_ConfigureEndpoints(&RawHID_HID_Interface);
 
     USB_Device_EnableSOFEvents();
-
-    // LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
 }
 
 /** Event handler for the library USB Control Request reception event. */
@@ -154,7 +152,8 @@ void EVENT_USB_Device_ControlRequest(void)
 void EVENT_USB_Device_StartOfFrame(void)
 {
     HID_Device_MillisecondElapsed(&Keyboard_HID_Interface);
-    HID_Device_MillisecondElapsed(&RawHID_HID_Interface);
+    // Probably not needed?
+    // HID_Device_MillisecondElapsed(&RawHID_HID_Interface);
 }
 
 /** HID class driver callback function for the creation of HID reports to the host.
@@ -206,15 +205,16 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                         // *ReportID = HID_KEYBOARD_REPORT_ID;
 
                         USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
-                        static uint8_t rpt_idx = 0;
+                        register uint8_t rpt_idx = 0;
+                        register uint8_t using_report_protocol = HIDInterfaceInfo->State.UsingReportProtocol;
 
                         // Scans keys and fills `key_status` based on whether RT is enabled
                         scan_keys();
 
                         // Filter SnapTap
-                        static uint8_t* snaptap_a_restore_ptr;
-                        static uint8_t* snaptap_b_restore_ptr;
-                        static uint8_t snaptap_do_restore;
+                        uint8_t* snaptap_a_restore_ptr;
+                        uint8_t* snaptap_b_restore_ptr;
+                        register uint8_t snaptap_do_restore = 0;
                         if (SNAPTAP_A_STATUS == SNAPTAP_ENABLED)
                             snaptap_do_restore |= snaptap(SNAPTAP_MODULE_A, &snaptap_a_restore_ptr) << 0;
                         if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED)
@@ -222,9 +222,25 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
 
                         // "key_idx < MAX_KEYS_SUPPORTED_PER_ROW;" is left as-is because of timing requirements
                         // If NUM_KEYS_PER_ROW[row_idx] is used, it violates 1000 Hz polling rate even at -Ofast
-                        for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
-                            for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW && rpt_idx < MAX_NKRO; ++key_idx) {
-                                if (key_status[row_idx][key_idx]) Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
+                        if (__builtin_expect(using_report_protocol, 1)) {
+                            // Report Protocol
+                            uint8_t keycode;
+                            for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
+                                for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
+                                    if (key_status[row_idx][key_idx]) {
+                                        keycode = KEYMAP_MATRIX[row_idx][key_idx];
+                                        Rpt->KeyCode[keycode >> 3] |= (1 << (keycode & 0x07));
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            // Boot Protocol
+                            for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
+                                for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
+                                    if (key_status[row_idx][key_idx])
+                                        Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
+                                }
                             }
                         }
 
@@ -234,23 +250,31 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                         if (SNAPTAP_B_STATUS == SNAPTAP_ENABLED && (snaptap_do_restore & (1 << 1)))
                             *snaptap_b_restore_ptr = PRESSED;
                         
-                        
                         // Rotary encoder section
-                        static uint8_t rotary_key;
+                        register uint8_t rotary_key;
                         rotary_prev = rotary_now;
                         rotary_now = PIND & ROTARY_MASK;
                         if (rotary_prev != rotary_now) {
                             rotary_key = determine_rotary_keycode();
-                            if (rotary_key != ROTARY_DIR_INVALID && rpt_idx < MAX_NKRO) {
-                                Rpt->KeyCode[rpt_idx++] = rotary_key;
+                            if (__builtin_expect(using_report_protocol, 1) && rotary_key != 0x00) {
+                                Rpt->KeyCode[rotary_key >> 3] |= (1 << (rotary_key & 0x07));
+                            }
+                            else {
+                                if (rpt_idx < 6)
+                                    Rpt->KeyCode[rpt_idx++] = rotary_key;
                             }
                         }
-                        if (ROTARY_PB_PRESSED && rpt_idx < MAX_NKRO) {
-                            Rpt->KeyCode[rpt_idx++] = ROTARY_PUSHBUTTON_KEYMAP;
+                        if (ROTARY_PB_PRESSED) {
+                            if (__builtin_expect(using_report_protocol, 1) && ROTARY_PUSHBUTTON_KEYMAP != 0x00) {
+                                Rpt->KeyCode[ROTARY_PUSHBUTTON_KEYMAP >> 3] |= (1 << (ROTARY_PUSHBUTTON_KEYMAP & 0x07));
+                            }
+                            else {
+                                if (rpt_idx < 6)
+                                    Rpt->KeyCode[rpt_idx++] = ROTARY_PUSHBUTTON_KEYMAP;
+                            }
                         }
 
                         *ReportSize = sizeof(*Rpt);
-                        rpt_idx = 0;
                         return false;
                     }
                     return false;

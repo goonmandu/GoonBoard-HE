@@ -27,7 +27,7 @@ typedef struct {
     uint8_t snaptap_b_key2;
 } keyboard_settings_t;
 
-extern volatile EEMEM keyboard_settings_t default_settings;
+extern EEMEM keyboard_settings_t default_settings;
 
 
 #endif
