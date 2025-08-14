@@ -188,10 +188,12 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
     switch (HIDInterfaceInfo->Config.InterfaceNumber) {
         case INTERFACE_ID_Keyboard: {
             /** DO NOT MODIFY!
-             *  The HID Keyboard 32KRO interface is merely an extension of the boot protocol
-             *  to support 32 simultaneous keys. Everything else is compliant to the boot protocol.
-             *  If in Report Protocol mode, everything works as expected and the first 32 keys are registered.
-             *  If in Boot Protocol mode, only the first six keys pressed will be recognized.
+             *  If the interface is configured as BOOT PROTOCOL,
+             *      the standard boot protocol (mod + res + 6kro) is sent out
+             *      and the HID report descriptor is ignored by host.
+             *  If the interface is configured as REPORT PROTOCOL,
+             *      the NKRO bitfield is constructed as defined in
+             *      `HID_DESCRIPTOR_NKRO_KEYBOARD`.
              */
             switch (*ReportID) {
                 // This case is only taken with the periodic keyboard status polls
@@ -238,7 +240,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                             // Boot Protocol
                             for (uint8_t row_idx = 0; row_idx < NUM_ROWS; ++row_idx) {
                                 for (uint8_t key_idx = 0; key_idx < MAX_KEYS_SUPPORTED_PER_ROW; ++key_idx) {
-                                    if (key_status[row_idx][key_idx])
+                                    if (key_status[row_idx][key_idx] && rpt_idx < 6)
                                         Rpt->KeyCode[rpt_idx++] = KEYMAP_MATRIX[row_idx][key_idx];
                                 }
                             }
