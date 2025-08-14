@@ -49,14 +49,14 @@ keyboard_settings_t EEMEM default_settings = {
     .rotary_pushbutton = KC_MEDIA_PLAY,
 
     .rt_status = false,
-    .rt_threshold = MM(0.3),
-    .rt_sc_threshold = MM(0.3),
+    .rt_threshold = MM(0.5),
+    .rt_sc_threshold = MM(0.5),
 
     .snaptap_a_status = SNAPTAP_ENABLED,
     .snaptap_a_key1 = SNAPTAP_KEYCOORDS(3, 1),
-    .snaptap_a_key2 = SNAPTAP_KEYCOORDS(3, 2),
+    .snaptap_a_key2 = SNAPTAP_KEYCOORDS(3, 3),
 
     .snaptap_b_status = SNAPTAP_ENABLED,
-    .snaptap_b_key1 = SNAPTAP_KEYCOORDS(4, 1),
-    .snaptap_b_key2 = SNAPTAP_KEYCOORDS(4, 2),
+    .snaptap_b_key1 = SNAPTAP_KEYCOORDS(2, 2),
+    .snaptap_b_key2 = SNAPTAP_KEYCOORDS(3, 2),
 };
