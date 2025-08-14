@@ -8,7 +8,6 @@
 extern uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
 extern USB_ClassInfo_HID_Device_t Keyboard_HID_Interface;
 extern USB_ClassInfo_HID_Device_t RawHID_HID_Interface;
-extern USB_ClassInfo_HID_Device_t NKRO_Keyboard_HID_Interface;
 
 int main(void) {
     SetupHardware();
