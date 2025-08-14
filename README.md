@@ -4,6 +4,17 @@ This repository contains the firmware source code for building a USB HID keyboar
 
 The web configurator companion is [GoonBoard-Configurator](https://github.com/goonmandu/GoonBoard-Configurator).
 
+## Features
+- 1000 Hz polling rate
+- Rapid trigger
+- SnapTap (two modules)
+- Full on-the-fly reconfigurability for:
+  - Keymaps
+  - Actuation points per key
+  - Rapid trigger enable/sensitivity
+  - SnapTap enable/keys
+- NKRO Support
+
 ## Parts used
 | Type            | Manufacturer         | Part Number       | Unit Price (USD) |
 |-----------------|----------------------|-------------------|------------------|
@@ -12,6 +23,7 @@ The web configurator companion is [GoonBoard-Configurator](https://github.com/go
 | Multiplexer     | TI                   | CD74HC4067M96     | 0.65             |
 | HE Sensor       | Nanjing Ouzhuo Tech  | OH49E-S           | 0.18             |
 | HE Switch       | Gateron              | KS-20T (90 pcs)   | 57.60            |
+| Rotary Encoder  | Alps                 | EC11              | 1.99             |
 
 ## Compiling and Uploading
 Since I have used the PlatformIO toolchain for the entirety of the development process, the steps using PlatformIO will be shared.
@@ -27,9 +39,12 @@ Since I have used the PlatformIO toolchain for the entirety of the development p
 ## Performance
 Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz, both SnapTap modules enabled.
 
+Reference release: [V3.250814.0](https://github.com/goonmandu/GoonBoard-HE/releases/tag/V3.250814.0)
+
 | Metric | RT On | RT Off |
 |-|-|-|
-| Time to finish one USB HID frame | 810 us | 772 us |
+| Start polling to sending HID report | 760 us | 730 us |
+| 1000 Hz polling rate compliance | ✅ | ✅ |
 
 ## Pin Assignments
 | AVR | Pro Micro | Function | Notes |
@@ -42,11 +57,15 @@ Tested with ATmega32U4 @ 16 MHz, target polling rate 1000 Hz, both SnapTap modul
 | PF5 | A2 | Key Mux S1 |
 | PF6 | A1 | Key Mux S2 |
 | PF7 | A0 | Key Mux S3 |
-| PC6 | 5 | RT Enable | Internal Pull-up |
+| PD4 | 4 | Knob "CLK" | aka signal "A", pulled high |
+| PD7 | 6 | Knob "DT" | aka signal "B", pulled high |
+| PC6 | 5 | Knob Button | pulled high |
+| PE6 | 7 | Caps Lock LED |
+| PB4 | 8 | Num Lock LED |
+| PB5 | 9 | Scr Lock LED | used as debug bit if<br>`DEBUG_BITS` is defined. |
 | PB6 | 10 | SPI /SS |
 | PB3 | 14 | SPI MISO |
 | PB1 | 15 | SPI SCLK |
-| *PE6* | *7* | *Debug* | Omitted in release binaries.<br>Only used if `DEBUG_BITS` is defined. |
 
 ## Versioning
 Format:
