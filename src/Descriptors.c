@@ -45,7 +45,45 @@
  *  more details on HID report descriptors.
  */
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
-    HID_DESCRIPTOR_NKRO_KEYBOARD,
+    HID_RI_USAGE_PAGE(8, 0x01),
+    HID_RI_USAGE(8, 0x06),
+    HID_RI_COLLECTION(8, 0x01),
+        // Modifiers
+        HID_RI_USAGE_PAGE(8, 0x07),
+        HID_RI_USAGE_MINIMUM(8, 0xE0),
+        HID_RI_USAGE_MAXIMUM(8, 0xE7),
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),
+        HID_RI_LOGICAL_MAXIMUM(8, 0x01),
+        HID_RI_REPORT_SIZE(8, 0x01),
+        HID_RI_REPORT_COUNT(8, 0x08),
+        HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+        // Reserved Byte
+        HID_RI_REPORT_COUNT(8, 0x01),
+        HID_RI_REPORT_SIZE(8, 0x08),
+        HID_RI_INPUT(8, HID_IOF_CONSTANT),
+
+        // True NKRO
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),
+        HID_RI_LOGICAL_MAXIMUM(8, 0x01),
+        HID_RI_USAGE_PAGE(8, 0x07),
+        HID_RI_USAGE_MINIMUM(8, 0x00),
+        HID_RI_USAGE_MAXIMUM(8, 0xFF),
+        HID_RI_REPORT_COUNT(16, 0x0100),
+        HID_RI_REPORT_SIZE(8, 0x01),
+        HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+        // LEDs
+        HID_RI_USAGE_PAGE(8, 0x08),
+        HID_RI_USAGE_MINIMUM(8, 0x01),
+        HID_RI_USAGE_MAXIMUM(8, 0x05),
+        HID_RI_REPORT_COUNT(8, 0x05),
+        HID_RI_REPORT_SIZE(8, 0x01),
+        HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_VOLATILE),
+        HID_RI_REPORT_COUNT(8, 0x01),
+        HID_RI_REPORT_SIZE(8, 0x03),
+        HID_RI_OUTPUT(8, HID_IOF_CONSTANT),
+    HID_RI_END_COLLECTION(0)
 };
 
 // HACK:
