@@ -71,7 +71,7 @@ USB_ClassInfo_HID_Device_t Keyboard_HID_Interface =
                     {
                         .Address                = KEYBOARD_EPADDR,
                         .Size                   = KEYBOARD_EPSIZE,
-                        .Banks                  = 1,
+                        .Banks                  = 2,  // One for KB/KP report, and another for Cons Ctrl report
                     },
                 .PrevReportINBuffer             = PrevKeyboardHIDReportBuffer,
                 .PrevReportINBufferSize         = sizeof(PrevKeyboardHIDReportBuffer),

@@ -203,7 +203,12 @@ void HID_Device_USBTask(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo)
 				// This is true if and only if this function was called by the
 				// periodic report generator.
 
+				// Switching of hardware banks is automatically done by LUFA
+				// when `Endpoint_ClearIN` is called so that data can be written
+				// to another bank without interfering with the current transfer.
+
 				// Send keyboard/keypad report with ReportID 0x01
+				// to primary hardware bank
 				uint8_t* KeyboardKeypadReport = ReportINData;
 			  	Endpoint_Write_8(0x01);
 
@@ -218,9 +223,12 @@ void HID_Device_USBTask(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo)
 										 NULL);
 				Endpoint_ClearIN();
 
-				Endpoint_WaitUntilReady();
+				// No need to wait for endpoint to be cleared because
+				// we are using two hardware banks
+				// Endpoint_WaitUntilReady();
 
 				// Now Consumer Controls Media keys, ReportID 0x02
+				// to alternate hardware bank
 				uint8_t* ConsumerControlsReport = ReportINData + (ReportINSize - sizeof(last_three_bytes_padding));
 				Endpoint_Write_8(0x02);
 				
