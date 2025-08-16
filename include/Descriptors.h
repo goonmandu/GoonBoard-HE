@@ -99,6 +99,9 @@
         /** Keyboard Lock LEDs Request is the same as Keyboard HID ReportID */
         #define LOCK_LEDS_REPORT_ID                 HID_KEYBOARD_REPORT_ID
 
+        #define BASIC_KEYCODES_REPORT_ID            0x01
+        #define CONSUMER_CONTROLS_REPORT_ID         0x02
+
         /** Fetch Configuration Request */
         #define FETCH_CONFIG_REPORT_ID              0xC0
         #define FETCH_CONFIG_REPORT_SIZE            204  /** sizeof(default_settings) */ 

@@ -1,3 +1,4 @@
+// Basic keycodes. These are sent via Keyboard/Keypad.
 #define KC_NO              0x00
 #define KC_ROLL_OVER       0x01
 #define KC_POST_FAIL       0x02
@@ -217,6 +218,8 @@
 #define KC_RSHIFT          0xE5
 #define KC_RALT            0xE6
 #define KC_RGUI            0xE7
+
+// Media keys. These are sent via Consumer Control.
 #define KC_MEDIA_PLAY      0xE8
 #define KC_MEDIA_STOP      0xE9
 #define KC_MEDIA_PREV      0xEA

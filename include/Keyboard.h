@@ -66,8 +66,7 @@ extern "C" {
         /** LED mask for the library LED driver, to indicate that an error has occurred in the USB interface. */
         #define LEDMASK_USB_ERROR        (LEDS_LED1 | LEDS_LED3)
 
-        #define PREV_REPORT_BUFFER_SIZE         (34)
-        #define PREV_NKRO_REPORT_BUFFER_SIZE    (64)
+        #define PREV_REPORT_BUFFER_SIZE         (sizeof(USB_KeyboardReport_Data_t))
 
         /** Rotary Encoder */
         #define ROTARY_SIGPB                PC6

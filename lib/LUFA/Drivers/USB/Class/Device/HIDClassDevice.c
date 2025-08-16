@@ -170,6 +170,7 @@ void HID_Device_USBTask(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo)
 
 	Endpoint_SelectEndpoint(HIDInterfaceInfo->Config.ReportINEndpoint.Address);
 
+	// Internal periodic report generation (keyboard poll)
 	if (Endpoint_IsReadWriteAllowed())
 	{
 		uint8_t  ReportINData[HIDInterfaceInfo->Config.PrevReportINBufferSize];
@@ -192,15 +193,49 @@ void HID_Device_USBTask(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo)
 		if (ReportINSize && (ForceSend || StatesChanged || IdlePeriodElapsed))
 		{
 			HIDInterfaceInfo->State.IdleMSRemaining = HIDInterfaceInfo->State.IdleCount;
+			// This part is customized to send the Consumer Controls report alongside
+			// the required Keyboard/Keypad report.
 
+			// Select HID Keyboard Endpoint
 			Endpoint_SelectEndpoint(HIDInterfaceInfo->Config.ReportINEndpoint.Address);
 
-			if (ReportID)
-			  Endpoint_Write_8(ReportID);
+			if (ReportID == 0x01) {
+				// This is true if and only if this function was called by the
+				// periodic report generator.
 
-			Endpoint_Write_Stream_LE(ReportINData, ReportINSize, NULL);
+				// Send keyboard/keypad report with ReportID 0x01
+				uint8_t* KeyboardKeypadReport = ReportINData;
+			  	Endpoint_Write_8(0x01);
 
-			Endpoint_ClearIN();
+				static uint8_t last_three_bytes_padding[3] = {0x00, 0x00, 0x00};
+				Endpoint_Write_Stream_LE(KeyboardKeypadReport,
+										 // Last 3 bytes are media keys intended
+										 // to be sent out via Consumer Control report
+										 ReportINSize - sizeof(last_three_bytes_padding),
+										 NULL);
+				Endpoint_Write_Stream_LE(last_three_bytes_padding,
+										 sizeof(last_three_bytes_padding),
+										 NULL);
+				Endpoint_ClearIN();
+
+				Endpoint_WaitUntilReady();
+
+				// Now Consumer Controls Media keys, ReportID 0x02
+				uint8_t* ConsumerControlsReport = ReportINData + (ReportINSize - sizeof(last_three_bytes_padding));
+				Endpoint_Write_8(0x02);
+				
+				Endpoint_Write_Stream_LE(ConsumerControlsReport,
+										 sizeof(last_three_bytes_padding),
+										 NULL);
+				Endpoint_ClearIN();
+			} else {
+				// All other reports
+				if (ReportID) Endpoint_Write_8(ReportID);
+				Endpoint_Write_Stream_LE(ReportINData,
+										 ReportINSize,
+										 NULL);
+				Endpoint_ClearIN();
+			}
 		}
 
 		HIDInterfaceInfo->State.PrevFrameNum = USB_Device_GetFrameNumber();

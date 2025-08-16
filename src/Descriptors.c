@@ -48,6 +48,8 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
     HID_RI_USAGE_PAGE(8, 0x01),
     HID_RI_USAGE(8, 0x06),
     HID_RI_COLLECTION(8, 0x01),
+        HID_RI_REPORT_ID(8, BASIC_KEYCODES_REPORT_ID),
+
         // Modifiers
         HID_RI_USAGE_PAGE(8, 0x07),
         HID_RI_USAGE_MINIMUM(8, 0xE0),
@@ -71,7 +73,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
         HID_RI_USAGE_MAXIMUM(8, 0xFF),
         HID_RI_REPORT_COUNT(16, 0x0100),
         HID_RI_REPORT_SIZE(8, 0x01),
-        HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+        HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),	
 
         // LEDs
         HID_RI_USAGE_PAGE(8, 0x08),
@@ -83,7 +85,49 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] = {
         HID_RI_REPORT_COUNT(8, 0x01),
         HID_RI_REPORT_SIZE(8, 0x03),
         HID_RI_OUTPUT(8, HID_IOF_CONSTANT),
-    HID_RI_END_COLLECTION(0)
+    HID_RI_END_COLLECTION(0),
+
+    // Media and Control Keys Bitfield
+    HID_RI_USAGE_PAGE(8, 0x0C),             // Consumer Page
+    HID_RI_USAGE(8, 0x01),                  // Consumer Controls
+    HID_RI_COLLECTION(8, 0x01),             // Application
+        HID_RI_REPORT_ID(8, CONSUMER_CONTROLS_REPORT_ID), 
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),    // Boolean OFF
+        HID_RI_LOGICAL_MAXIMUM(8, 0x01),    // Boolean ON
+
+        // These are mapped to Keycodes.h.
+
+        HID_RI_USAGE(8, 0xCD),              // Play/Pause
+        HID_RI_USAGE(8, 0xB7),              // Stop
+        HID_RI_USAGE(8, 0xB6),              // Prev Track
+        HID_RI_USAGE(8, 0xB5),              // Next Track
+        HID_RI_USAGE(8, 0xB8),              // Eject
+        HID_RI_USAGE(8, 0xE9),              // Volume Up
+        HID_RI_USAGE(8, 0xEA),              // Volume Down
+        HID_RI_USAGE(8, 0xE2),              // Mute
+
+        HID_RI_USAGE(8, 0x8A),              // WWW
+        HID_RI_USAGE(16, 0x0224),           // History Backward
+        HID_RI_USAGE(16, 0x0225),           // History Forward
+        HID_RI_USAGE(16, 0x025F),           // Cancel
+        HID_RI_USAGE(16, 0x0221),           // Search
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+
+        HID_RI_USAGE(8, 0x32),              // Sleep
+        HID_RI_USAGE(16, 0x026B),           // Lock
+        HID_RI_USAGE(16, 0x0227),           // Reload
+        HID_RI_USAGE(16, 0x0192),           // Calculator
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+        HID_RI_USAGE(8, 0x00),              // Undefined (not used)
+
+        HID_RI_REPORT_SIZE(8, 0x01),            // 1 bit per report
+        HID_RI_REPORT_COUNT(8, 24),           // 24 reports
+        HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+    HID_RI_END_COLLECTION(0),
 };
 
 // HACK:
@@ -109,10 +153,8 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM RawHIDReport[] = {
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
         HID_RI_REPORT_SIZE(8, 0x08),
-        HID_RI_REPORT_COUNT(8, 0),  // No data is intended to be sent back
+        HID_RI_REPORT_COUNT(8, 0x04),  // 1 (cmd) + 3 (params)
         HID_RI_FEATURE(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
-
-        // Edit actuation report
     HID_RI_END_COLLECTION(0)
 };
 

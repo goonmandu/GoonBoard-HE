@@ -43,6 +43,7 @@
 #include "DefaultSettings.h"
 #include "Hacks.h"
 #include "SnapTap.h"
+#include "Keycodes.h"
 
 /** Buffer to hold the previously generated Keyboard HID report, for comparison purposes inside the HID class driver. */
 uint8_t PrevKeyboardHIDReportBuffer[PREV_REPORT_BUFFER_SIZE];
@@ -204,7 +205,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                         // Set outbound ReportID to the one specified in the descriptor
                         // This does nothing right now because we're not using Report IDs for keyboards
                         // which makes it default to the Report ID 0x00
-                        // *ReportID = HID_KEYBOARD_REPORT_ID;
+                        *ReportID = BASIC_KEYCODES_REPORT_ID;
 
                         USB_KeyboardReport_Data_t* Rpt = (void*)ReportData;
                         register uint8_t rpt_idx = 0;
