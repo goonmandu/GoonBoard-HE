@@ -331,7 +331,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                         buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key1);
                         buf[offset++] = eeprom_read_byte((const uint8_t*)&default_settings.snaptap_b_key2);
 
-                        *ReportSize = offset;  // should be 201
+                        *ReportSize = offset;  // should be 204
                         return true;
                     }
                     return false;
@@ -378,7 +378,7 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                 //
                 // Byte         0           1
                 // Meaning      ReportID    LED Bits
-                case LOCK_LEDS_REPORT_ID: {
+                case BASIC_KEYCODES_REPORT_ID: {
                     uint8_t* LEDReport = (uint8_t*)ReportData;
                     if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
                         numlock_on();
